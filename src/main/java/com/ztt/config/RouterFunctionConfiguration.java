@@ -38,7 +38,7 @@ public class RouterFunctionConfiguration {
         return RouterFunctions.route(RequestPredicates.GET("/person/findAll"),
                 request ->{//lambda表达式
                     List<User> users = userRepository.findAll();//java collection集合接口？
-                    Mono<ServerResponse> response = null;
+                    //Mono<ServerResponse> response = null;
                     Flux<User> userFlux = Flux.fromIterable(users);
                     return ServerResponse.ok().body(userFlux, User.class);
                 });
