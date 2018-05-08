@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl implements UserService{
 
-    private static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(UserServiceImpl.class);
 
     private final UserRepository userRepository;
 

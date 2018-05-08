@@ -10,7 +10,6 @@ import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.RouterFunctions;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
 
 import java.util.List;
 
@@ -37,7 +36,7 @@ public class RouterFunctionConfiguration {
     public RouterFunction<ServerResponse> personFindAll(UserRepository userRepository) {//spring 4种注入方式？
         return RouterFunctions.route(RequestPredicates.GET("/person/findAll"),
                 request ->{//lambda表达式
-                    List<User> users = userRepository.findAll();//java collection集合接口？
+                    List<User> users = userRepository.findAll();
                     //Mono<ServerResponse> response = null;
                     Flux<User> userFlux = Flux.fromIterable(users);
                     return ServerResponse.ok().body(userFlux, User.class);

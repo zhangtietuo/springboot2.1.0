@@ -6,7 +6,14 @@
 	<groupId>com.ztt</groupId>
 	<artifactId>springboot2</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+
+	<modules>
+		<module>web</module>
+		<module>domain</module>
+		<module>dao</module>
+	</modules>
+
+	<packaging>pom</packaging><!-- 修改为pom代表为父项目 -->
 
 	<name>springboot2</name>
 	<description>Demo project for Spring Boot2</description>
