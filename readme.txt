@@ -4,3 +4,4 @@
         响应编程(Reactive Streams)
         异步编程Servlet3.1或Asyc NIO
 4.maven命令行方式创建项目mvn archetype:generate -DinteractiveMode=false -DgroupId=com.ztt -DartifactId=first-app-by-maven -Dversion=1.0.0-SNAPSHOT
+5.把springboot应用由单模块变成多模块应用
