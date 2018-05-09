@@ -1,25 +1,25 @@
 spring:
   profiles:
     active: prod
-  jackson:
+  jackson: #序列化时间格式化
     date-format: yyyy年MM月dd日 HH:mm:ss
   datasource:
       url: jdbc:mysql://127.0.0.1:3306/mysql?useUnicode=true&characterEncoding=utf8&autoReconnect=true&useSSL=false
       username: root
       password: root
       driver-class-name: com.mysql.jdbc.Driver
+      hikari:
+        connectionTimeout: 10000 # 定义获取连接的超时时间。最小250ms,默认30s
+        idleTimeout: 50000 # 定义连接空闲时间。最小10s,默认10m
+        maximumPoolSize: 100 # 定义最大的连接数。默认10
+        connectionTestQuery: select 1 # 从连接池获取到连接后，进行检查的查询语句。推荐设置该属性。默认值为none
+        maxLifeTime: 600000 # 定义连接的最大生命周期。推荐设置该属性。最小30s，默认30m
   application:
-    name: girl-service
+    name: springboot-ztt
 
-management: #配置默认查看系统信息不使用身份验证
-  security:
-    enabled: false
 
-endpoints: #http://localhost:8080/myProject/shutdown 会自动关闭系统 springboot2不好用？
-  shutdown:
-    enabled: true
 
----
+--- #yml支持多文档块的方式
 spring:
   profiles: dev
 
@@ -45,7 +45,8 @@ spring:
 
 server:
   port: 8081
-  context-path: /myProject #配置项目根目录 springboot2不好用？
+  servlet:
+    context-path: /myProject #配置项目根目录 springboot2不好用？
 
 manSize: 176
 manAge: 24
@@ -56,6 +57,13 @@ user:
   name: ???!
   nickname: zhangtietuo-prod
 
+my:
+  property:
+    name: zhangtietuo
+    age: 25
+    #- abc
+    #- def
+    #'[foo.baz]': bar
 
 
 

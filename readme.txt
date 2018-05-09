@@ -6,3 +6,11 @@
 4.maven命令行方式创建项目mvn archetype:generate -DinteractiveMode=false -DgroupId=com.ztt -DartifactId=first-app-by-maven -Dversion=1.0.0-SNAPSHOT
 5.把springboot应用由单模块变成多模块应用
 6.启动项目：java -jar web-0.0.1-SNAPSHOT.jar --spring.profiles.active=dev --server.port=8888
+7.Relaxed Binding 2.0
+8. Hikari连接池
+9.ApplicationStartingEvent
+  ApplicationEnvironmentPreparedEvent
+  ApplicationPreparedEvent
+  ApplicationStartedEvent <= 新增的事件
+  ApplicationReadyEvent
+  ApplicationFailedEvent
