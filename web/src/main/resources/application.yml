@@ -1,0 +1,61 @@
+spring:
+  profiles:
+    active: prod
+  jackson:
+    date-format: yyyy年MM月dd日 HH:mm:ss
+  datasource:
+      url: jdbc:mysql://127.0.0.1:3306/mysql?useUnicode=true&characterEncoding=utf8&autoReconnect=true&useSSL=false
+      username: root
+      password: root
+      driver-class-name: com.mysql.jdbc.Driver
+  application:
+    name: girl-service
+
+management: #配置默认查看系统信息不使用身份验证
+  security:
+    enabled: false
+
+endpoints: #http://localhost:8080/myProject/shutdown 会自动关闭系统 springboot2不好用？
+  shutdown:
+    enabled: true
+
+---
+spring:
+  profiles: dev
+
+server:
+  port: 8080
+
+manSize: 176
+manAge: 24
+content: "年龄${manAge},身高${manSize}"
+
+user:
+  id: 100
+  name: ???
+  nickname: zhangtietuo-dev
+---
+spring:
+  profiles: test
+server:
+  port: 8082
+---
+spring:
+  profiles: prod
+
+server:
+  port: 8081
+  context-path: /myProject #配置项目根目录 springboot2不好用？
+
+manSize: 176
+manAge: 24
+content: "年龄${manAge},身高${manSize}"
+
+user:
+  id: ${random.int[20,30]} #项目启动后就不会再改变
+  name: ???!
+  nickname: zhangtietuo-prod
+
+
+
+

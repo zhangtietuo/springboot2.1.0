@@ -1,15 +1,24 @@
 package com.ztt.domain;
 
-import java.util.Optional;
+
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
+
+import java.util.Date;
+
 
 /**
  * Created by zhangtietuo on 2018/4/17.
  */
+@Component
+@ConfigurationProperties(prefix = "user")
 public class User {
 
     private Long id;
 
     private String name;
+
+    private Date createDate;
 
     public Long getId() {
         return id;
@@ -27,6 +36,14 @@ public class User {
         this.name = name;
     }
 
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -37,6 +54,6 @@ public class User {
 
     public static void main(String[] args) {
         User user = null;
-       // Optional.
+        // Optional.
     }
 }

@@ -8,13 +8,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 /**
  * Created by zhangtietuo on 2018/4/17.
  */
 @Service
 public class UserServiceImpl implements UserService{
 
-    private static final Logger log = org.slf4j.LoggerFactory.getLogger(UserServiceImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
 
     private final UserRepository userRepository;
 
@@ -27,6 +29,7 @@ public class UserServiceImpl implements UserService{
     public User save(String name) {
         User user = new User();
         user.setName(name);
+        user.setCreateDate(new Date());
         if(userRepository.save(user)) {
             log.info("用户保存成功,{}", user);
         } else {
