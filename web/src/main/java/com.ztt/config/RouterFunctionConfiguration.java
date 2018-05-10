@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
-import org.springframework.web.reactive.function.server.RequestPredicates;
-import org.springframework.web.reactive.function.server.RouterFunction;
-import org.springframework.web.reactive.function.server.RouterFunctions;
-import org.springframework.web.reactive.function.server.ServerResponse;
+import org.springframework.web.reactive.function.server.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -41,6 +38,7 @@ public class RouterFunctionConfiguration {
     @Bean
     @Autowired
     public RouterFunction<ServerResponse> persons(UserService userService, UserRepository userRepository) {//spring 4种注入方式？
+        RouterFunctionConfiguration handler = new RouterFunctionConfiguration();
         return route(RequestPredicates.GET("/persons"),
                     request ->{//lambda表达式
                         List<User> users = userRepository.findAll();
@@ -80,6 +78,12 @@ public class RouterFunctionConfiguration {
                                     User user = userService.save(addUser.block().getName());
                                     return ServerResponse.ok().body(Mono.just(user), User.class);
                                 })
-                    );
+                    ).filter((request, next) -> {
+                        System.out.println("Before handler invocation: " + request.path());
+                        Mono<ServerResponse> response = next.handle(request);
+                        System.out.println("After handler invocation: " + response);
+                        return response;
+                    });
     }
+
 }
