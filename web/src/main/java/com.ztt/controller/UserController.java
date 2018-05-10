@@ -60,7 +60,7 @@ public class UserController {
 
     @PostMapping("/persons1")
     public User save(@RequestBody User user) {
-        log.info("RequestBody");
+        log.debug("RequestBody");
         log.info("{},{},{},{},{},{}", manSize, manAge, content, id, nickname, name);
         log.info("user.id:{},user.name:{}", user.getId(), user.getName());
         log.info("当前时间为：{}", new Date());
