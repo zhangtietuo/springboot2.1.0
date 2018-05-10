@@ -44,6 +44,15 @@ public class User {
         this.createDate = createDate;
     }
 
+    public User(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public User() {
+
+    }
+
     @Override
     public String toString() {
         return "User{" +

@@ -37,4 +37,18 @@ public class UserRepository {
         }
         return users;
     }
+
+    public User findById(Long uid) {
+        User user = repository.getOrDefault(uid, new User(0L, "I am nothing"));
+        return user;
+    }
+
+    public User update(Long uid) {
+        return repository.remove(uid);
+    }
+
+    public User delById(Long uid) {
+        //repository.computeIfAbsent()
+        return repository.remove(uid);
+    }
 }

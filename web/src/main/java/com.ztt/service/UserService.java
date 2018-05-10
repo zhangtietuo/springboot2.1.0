@@ -8,4 +8,6 @@ import com.ztt.domain.User;
 public interface UserService {
 
     User save(String name);
+
+    User save(User user);
 }

@@ -38,4 +38,16 @@ public class UserServiceImpl implements UserService{
 
         return user;
     }
+
+    @Override
+    public User save(User user) {
+        user.setCreateDate(new Date());
+        if(userRepository.save(user)) {
+            log.info("用户保存成功,{}", user);
+        } else {
+            log.error("用户保存失败{}", user);
+        }
+
+        return user;
+    }
 }
