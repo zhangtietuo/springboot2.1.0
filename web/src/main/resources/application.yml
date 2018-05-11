@@ -17,6 +17,9 @@ spring:
   application:
     name: springboot-ztt
 
+#logging:
+ # level:
+  #  com.ztt.controller.UserController: 'off'   #路径下日志不会被打印
 
 
 --- #yml支持多文档块的方式
