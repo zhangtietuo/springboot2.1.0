@@ -16,6 +16,11 @@ spring:
         maxLifeTime: 600000 # 定义连接的最大生命周期。推荐设置该属性。最小30s，默认30m
   application:
     name: springboot-ztt
+  devtools:
+    restart:
+      additional-paths:
+        - C:\Users\zhangtt\IdeaProjects\springboot2.1.0\restart
+      enabled: false
 
 server:
   servlet:

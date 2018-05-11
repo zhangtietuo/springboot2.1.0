@@ -14,3 +14,5 @@
   ApplicationStartedEvent <= 新增的事件
   ApplicationReadyEvent
   ApplicationFailedEvent
+
+10.热部署 spring-boot-devtools  https://blog.csdn.net/aqsunkai/article/details/69663159
