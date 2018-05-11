@@ -26,6 +26,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <mainClass>com.ztt.Springboot2Application</mainClass>
+                    <fork>true</fork>
                 </configuration>
             </plugin>
         </plugins>

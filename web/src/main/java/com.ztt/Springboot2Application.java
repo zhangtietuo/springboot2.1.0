@@ -3,6 +3,7 @@ package com.ztt;
 import com.ztt.domain.PersonInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -21,8 +22,6 @@ public class Springboot2Application {
 
 	public static void main(String[] args) {
 		ApplicationContext context = SpringApplication.run(Springboot2Application.class, args);
-
-		//List<PersonInfo> peopleList = Binder.get(context.getEnvironment()).bind("my.property", Bindable.listOf(PersonInfo.class)).orElseThrow(IllegalStateException::new);
-		//Binder binder = Binder.get(context.getEnvironment());
+		PersonInfo personInfo = Binder.get(context.getEnvironment()).bind("my.property", Bindable.of(PersonInfo.class)).orElseThrow(IllegalStateException::new);
 	}
 }

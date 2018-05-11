@@ -8,8 +8,6 @@ import org.springframework.stereotype.Component;
  * @Description:
  * @Date: 2018/5/9 11:58
  */
-@Component
-@ConfigurationProperties(prefix = "my.property")
 public class PersonInfo {
 
     private String name;

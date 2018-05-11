@@ -1,7 +1,7 @@
 spring:
   profiles:
     active: prod
-  jackson: #序列化时间格式化
+  jackson: #序列化时间格式化 Srping boot默认使用Jackson来进行序列化和返序列化
     date-format: yyyy年MM月dd日 HH:mm:ss
   datasource:
       url: jdbc:mysql://127.0.0.1:3306/mysql?useUnicode=true&characterEncoding=utf8&autoReconnect=true&useSSL=false
@@ -16,6 +16,11 @@ spring:
         maxLifeTime: 600000 # 定义连接的最大生命周期。推荐设置该属性。最小30s，默认30m
   application:
     name: springboot-ztt
+
+server:
+  servlet:
+    context-path: /springboot2
+
 
 #logging:
  # level:
