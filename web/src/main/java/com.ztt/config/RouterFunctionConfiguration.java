@@ -63,7 +63,7 @@ public class RouterFunctionConfiguration {
                                 User user = userRepository.delById(Long.valueOf(uid));
                                 return ServerResponse.ok().body(Mono.just(user), User.class);
                         })
-                    ).and(
+                    ).and( //未实现
                         route(RequestPredicates.PUT("/persons/{uid}"),
                                 request ->{//lambda表达式
                                     String uid = request.pathVariable("uid");
@@ -71,7 +71,7 @@ public class RouterFunctionConfiguration {
                                     User user = userRepository.update(Long.valueOf(uid));
                                     return ServerResponse.ok().body(Mono.just(user), User.class);
                                 })
-                    ).and(
+                    ).and( //未实现
                         route(POST("/persons").and(RequestPredicates.accept(MediaType.APPLICATION_JSON)),
                                 request ->{//lambda表达式
                                     Mono<User> addUser = request.bodyToMono(User.class);
