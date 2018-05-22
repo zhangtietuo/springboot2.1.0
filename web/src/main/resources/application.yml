@@ -4,7 +4,7 @@ spring:
   jackson: #序列化时间格式化 Srping boot默认使用Jackson来进行序列化和返序列化
     date-format: yyyy年MM月dd日 HH:mm:ss
   datasource:
-      url: jdbc:mysql://127.0.0.1:3306/mysql?useUnicode=true&characterEncoding=utf8&autoReconnect=true&useSSL=false
+      url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf8&autoReconnect=true&useSSL=false
       username: root
       password: root
       driver-class-name: com.mysql.jdbc.Driver
@@ -25,6 +25,10 @@ spring:
 server:
   servlet:
     context-path: /springboot2
+
+mybatis:
+  mapper-locations: classpath:mapping/*.xml
+  type-aliases-package: com.winter.model
 
 
 #logging:
