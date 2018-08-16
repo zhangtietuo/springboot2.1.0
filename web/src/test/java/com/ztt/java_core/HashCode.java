@@ -1,5 +1,8 @@
 package com.ztt.java_core;
 
+import java.util.ArrayDeque;
+import java.util.Queue;
+
 /**
  * @Auther: zhangtietuo
  * @Description:
@@ -21,5 +24,8 @@ public class HashCode {
         System.out.println(b.hashCode());
         System.out.println(c.hashCode());
         System.out.println(d.hashCode());
+        ArrayDeque queue = new ArrayDeque();
+        String[] array = new String[7];
+
     }
 }
