@@ -7,7 +7,7 @@ import java.util.function.Predicate;
 
 /**
  * @Auther: zhangtietuo
- * @Description:
+ * @Description: java.util.function
  * @Date: 2018/5/21 14:42
  */
 public class FunctionalInterfaceTester {
@@ -41,7 +41,7 @@ public class FunctionalInterfaceTester {
         System.out.println("===========================华丽的分割线===============================");
 
         BiFunction<Integer, Integer, String> biFunction = (a, b) -> a+b+"";
-        System.out.println(biFunction.apply(1, 9));
+        System.out.println(biFunction.apply(9, 1));
 
         System.out.println("===========================华丽的分割线===============================");
 

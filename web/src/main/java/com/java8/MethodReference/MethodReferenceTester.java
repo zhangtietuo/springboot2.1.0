@@ -11,7 +11,7 @@ import java.util.function.Supplier;
  * @Date: 2018/5/10 16:35
  */
 public class MethodReferenceTester {
-    //Supplier是jdk1.8的接口，这里和lamda一起使用了
+    //Supplier是jdk1.8的接口，这里和lambda一起使用了
     public static MethodReferenceTester create(Supplier<MethodReferenceTester> supplier) {
         return supplier.get();
     }
