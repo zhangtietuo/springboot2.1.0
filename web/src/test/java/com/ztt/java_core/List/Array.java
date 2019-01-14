@@ -34,8 +34,8 @@ public class Array {
         list.remove(1);
         System.out.println(list.get(1));
 
-        List<String> linkedList = new LinkedList();
-        //linkedList.
+        LinkedList<String> linkedList = new LinkedList();
+        //linkedList
     }
 
     public static void ArrayAdd(String[] numArr) {
