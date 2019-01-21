@@ -1,4 +1,4 @@
-package com.ztt;
+package com.ztt.java_core.Exception;
 
 /**
  * @Auther: zhangtietuo
