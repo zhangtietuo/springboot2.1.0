@@ -7,8 +7,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
+import redis.clients.jedis.Jedis;
 
 import java.util.Date;
+import java.util.UUID;
 
 /**
  * Created by zhangtietuo on 2018/4/17.
@@ -34,6 +36,10 @@ public class UserController {
     @Value("${user.name}")
     private String name;
 
+    private static final String LOCK_SUCCESS = "OK";
+    private static final String SET_IF_NOT_EXIST = "NX";
+    private static final String SET_WITH_EXPIRE_TIME = "PX";
+
     @Autowired
     User user;
 
@@ -48,6 +54,10 @@ public class UserController {
 
     @GetMapping("/")
     public String index() {
+        Jedis jedis = new Jedis("172.18.10.41", 6379);
+        jedis.auth("redis!123");
+        jedis.select(15);
+        String value = jedis.set("aaa", UUID.randomUUID().toString(), SET_IF_NOT_EXIST, SET_WITH_EXPIRE_TIME, 10000);
         return "你好,docker";
     }
 
