@@ -1,14 +1,15 @@
 package com.ztt;
 
-import com.ztt.domain.PersonInfo;
+import com.ztt.config.AppConfig;
+import com.ztt.service.UserService;
+import com.ztt.service.impl.UserServiceImpl;
 import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.properties.bind.Bindable;
-import org.springframework.boot.context.properties.bind.Binder;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 
 @SpringBootApplication
@@ -19,7 +20,10 @@ public class Springboot2Application {
 	private final Logger log = LoggerFactory.getLogger(getClass());
 
 	public static void main(String[] args) {
+		//AnnotationConfigApplicationContext annotationConfigApplicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
 		ApplicationContext context = SpringApplication.run(Springboot2Application.class, args);
-		PersonInfo personInfo = Binder.get(context.getEnvironment()).bind("my.property", Bindable.of(PersonInfo.class)).orElseThrow(IllegalStateException::new);
+		UserService userService = context.getBean(UserServiceImpl.class);
+		userService.save("ztt");
+		//PersonInfo personInfo = Binder.get(context.getEnvironment()).bind("my.property", Bindable.of(PersonInfo.class)).orElseThrow(IllegalStateException::new);
 	}
 }

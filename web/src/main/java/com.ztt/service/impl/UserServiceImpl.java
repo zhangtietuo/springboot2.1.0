@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User save(String name) {
-        User user = new User();
+        /*User user = new User();
         user.setName(name);
         user.setCreateDate(new Date());
         if(userRepository.save(user)) {
@@ -36,7 +36,9 @@ public class UserServiceImpl implements UserService{
             log.error("用户保存失败{}", user);
         }
 
-        return user;
+        return user;*/
+        System.out.println("保存user");
+        return null;
     }
 
     @Override

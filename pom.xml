@@ -11,7 +11,8 @@
 		<module>web</module>
 		<module>domain</module>
 		<module>dao</module>
-	</modules>
+        <module>message-producer</module>
+    </modules>
 
 	<packaging>pom</packaging><!-- 修改为pom代表为父项目 -->
 
