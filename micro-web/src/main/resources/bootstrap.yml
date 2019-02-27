@@ -1,3 +1,4 @@
+#启动完config后在浏览器执行http://localhost:3001/micro-web.properties
 eureka:
   client:
     serviceUrl:
