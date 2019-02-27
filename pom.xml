@@ -8,12 +8,13 @@
 	<version>0.0.1-SNAPSHOT</version>
 
 	<modules>
-		<module>web</module>
+		<module>micro-web</module>
 		<module>domain</module>
 		<module>dao</module>
         <module>message-producer</module>
-		<module>eureka</module>
-    </modules>
+		<module>micro-eureka</module>
+		<module>micro-config</module>
+	</modules>
 
 	<packaging>pom</packaging><!-- 修改为pom代表为父项目 -->
 

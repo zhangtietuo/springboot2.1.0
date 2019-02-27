@@ -1,0 +1,24 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:3000/eureka/
+  instance:
+      lease-expiration-duration-in-seconds: 2
+      lease-renewal-interval-in-seconds:  1
+
+server:
+  port: 3001
+
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/zhangtietuo/micro-config-repos
+      username: 740890845@qq.com
+      password: Qq740890845
+  application:
+      name: micro-config
+
+
+
