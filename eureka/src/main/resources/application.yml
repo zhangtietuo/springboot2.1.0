@@ -1,0 +1,17 @@
+server:
+  port: 8761
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    # 设置是否将自己作为客户端注册到注册中心（缺省true）
+    # 这里为不需要（查看@EnableEurekaServer注解的源码，会发现它间接用到了@EnableDiscoveryClient）
+    registerWithEureka: false
+    # 设置是否从注册中心获取注册信息（缺省true）
+    # 因为这是一个单点的EurekaServer，不需要同步其它EurekaServer节点的数据，故设为false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+#  server:
+#    enable-self-preservation: false  # 设为false，关闭自我保护
+#    eviction-interval-timer-in-ms: 4000 # 清理间隔（单位毫秒，默认是60*1000）
