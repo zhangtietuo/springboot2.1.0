@@ -1,3 +1,12 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:3000/eureka/
+  instance:
+      lease-expiration-duration-in-seconds: 2
+      lease-renewal-interval-in-seconds:  1
+      instance-id: web-1
+
 spring:
   profiles:
     active: prod
