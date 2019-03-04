@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -16,13 +17,14 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 @SpringBootApplication
 @MapperScan("com.ztt.mapper")
 @EnableDiscoveryClient
+@EnableFeignClients
 //@EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class})  //因为创建项目时候添加了数据库组件，所以autoconfig会去读取数据源配置，而新建的项目还没有配置数据源，所以会导致异常出现
 public class Springboot2Application {
 
 	private final Logger log = LoggerFactory.getLogger(getClass());
 
 	public static void main(String[] args) {
-		//AnnotationConfigApplicationContext annotationConfigApplicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
+		//AnnotationConfigApplicationContext annotationConfigApplicationContext = new AnnotationConfigApplicationContext("com.ztt");
 		ApplicationContext context = SpringApplication.run(Springboot2Application.class, args);
 		UserService userService = context.getBean(UserServiceImpl.class);
 		userService.save("ztt");

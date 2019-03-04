@@ -16,3 +16,5 @@
   ApplicationFailedEvent
 
 10.热部署 spring-boot-devtools  https://blog.csdn.net/aqsunkai/article/details/69663159
+
+11. 在配置服务时的VMoptions中添加启动的端口: -Dserver.port=8082

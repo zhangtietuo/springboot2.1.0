@@ -1,6 +1,8 @@
 package com.ztt.Collection;
 
 import java.util.HashSet;
+import java.util.Hashtable;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -16,5 +18,7 @@ public class HashSetDemo {
         System.out.println(Integer.MAX_VALUE);
         System.out.println(Integer.MAX_VALUE+1);
         System.out.println(Integer.MAX_VALUE+1<Integer.MAX_VALUE);
+        Map hashtable = new Hashtable();
+        hashtable.put(null, 1);
     }
 }
