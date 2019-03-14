@@ -2,6 +2,7 @@ package com.ztt.service.impl;
 
 import com.ztt.domain.User;
 import com.ztt.repository.UserRepository;
+import com.ztt.repository.UserRepositoryInter;
 import com.ztt.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,10 +19,10 @@ public class UserServiceImpl implements UserService{
 
     private static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
 
-    private final UserRepository userRepository;
+    private final UserRepositoryInter userRepository;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepositoryInter userRepository) {
         this.userRepository = userRepository;
     }
 
@@ -35,8 +36,8 @@ public class UserServiceImpl implements UserService{
         } else {
             log.error("用户保存失败{}", user);
         }
-
         return user;*/
+        userRepository.findAll();
         System.out.println("保存user");
         return null;
     }

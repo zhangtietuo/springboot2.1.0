@@ -8,7 +8,7 @@ class SyncThread implements Runnable {
         count = 0;
     }
 
-    public  void run() {
+    public synchronized void run() {
         System.out.println(Thread.currentThread().getName()+ "====RUN");
         synchronized(this) {
             for (int i = 0; i < 5; i++) {
