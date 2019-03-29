@@ -2,6 +2,9 @@ package com.ztt.controller;
 
 import com.ztt.domain.User;
 import com.ztt.service.UserService;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,6 +80,19 @@ public class UserController {
         log.info("user.id:{},user.name:{}", user.getId(), user.getName());
         log.info("当前时间为：{}", new Date());
         return userService.save(user);
+    }
+
+    @PostMapping("/dologin")
+    public String dologin(String username, String password) {
+        Subject subject = SecurityUtils.getSubject();
+        UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+        subject.login(token);
+        if(subject.hasRole("admin")) {
+            return "admin";
+        }
+
+
+        return null;
     }
 
 }
