@@ -11,20 +11,18 @@ import java.util.Arrays;
  */
 public class 从排序数组中删除重复项 {
 
-    public static int removeDuplicates(int[] numarr) {
-        if (numarr.length == 0) {
+    public static int removeDuplicates(int[] nums) {
+        if(nums==null)
             return 0;
-        }
-
-        int number = 0;
-        for (int i = 1; i < numarr.length; i++) {
-            if (numarr[i] != numarr[number]) {
-                number++;
-                numarr[number] = numarr[i];
+        if(nums.length<2)
+            return nums.length;
+        int index = 1;
+        for(int i = 1;i<nums.length;i++){
+            if(nums[i]!=nums[index-1]){
+                nums[index++] = nums[i];
             }
         }
-        System.out.println(Arrays.toString(numarr));
-        return number + 1;
+        return index;
     }
 
     public static void main(String[] args) {
