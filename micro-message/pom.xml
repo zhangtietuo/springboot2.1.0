@@ -9,9 +9,9 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>message-producer</artifactId>
+    <artifactId>message_producer</artifactId>
 
-    <name>message-producer</name>
+    <name>message_producer</name>
     <!-- FIXME change it to the project's website -->
     <url>http://www.example.com</url>
 
@@ -29,6 +29,10 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-config-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-feign</artifactId>
         </dependency>
         <dependency>
             <groupId>junit</groupId>

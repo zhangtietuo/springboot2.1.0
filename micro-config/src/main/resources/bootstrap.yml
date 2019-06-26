@@ -9,12 +9,19 @@ eureka:
 server:
   port: 3001
 
+#配置文件的路径规则：
+#/{label}/{name}-{profiles}.{type}
+#label 分支名称 如：master dev ，不写就是master。
+#name 配置文件名称
+#profiles 环境名称，不可省略，假如我们的仓库中配置文件命名没有环境名称，可以profile可以写为-a
 spring:
   cloud:
     config:
       server:
         git:
           uri: https://github.com/zhangtietuo/micro-config-repos
+          basedir:  C:/springcloud-Config #配置文件从git取下来放置的位置
+          clone-on-start: true
       username: 740890845@qq.com
       password: Qq740890845
   application:

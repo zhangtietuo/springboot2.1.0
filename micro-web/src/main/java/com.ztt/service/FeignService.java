@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @Description:
  * @Date: 2019/2/28 16:58
  */
-@FeignClient("micro-message-producer")
+@FeignClient("message")
 public interface FeignService {
 
     @RequestMapping(value = "/hi",method = RequestMethod.GET)

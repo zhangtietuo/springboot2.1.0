@@ -11,7 +11,7 @@
 		<module>micro-web</module>
 		<module>domain</module>
 		<module>dao</module>
-        <module>message-producer</module>
+        <module>message</module>
 		<module>micro-eureka</module>
 		<module>micro-config</module>
 	</modules>
