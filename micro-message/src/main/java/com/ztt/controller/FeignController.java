@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @Date: 2019/2/28 17:16
  */
 @RestController
-@RequestMapping("feign-server")
+@RequestMapping("feign-message")
 public class FeignController {
 
     @RequestMapping(value = "/hi",method = RequestMethod.GET)
