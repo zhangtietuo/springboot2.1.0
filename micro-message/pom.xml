@@ -9,9 +9,9 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>message_producer</artifactId>
+    <artifactId>message</artifactId>
 
-    <name>message_producer</name>
+    <name>message</name>
     <!-- FIXME change it to the project's website -->
     <url>http://www.example.com</url>
 
