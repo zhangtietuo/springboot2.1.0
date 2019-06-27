@@ -21,7 +21,8 @@ public class FeignController {
 
     @GetMapping("/feignMethod")
     public void feignMethod() {
-        feignService.sayHiFromFeignServer("ztt-feign");
+        String result = feignService.sayHiFromFeignServer("ztt-feign");
+        System.out.println(result);
     }
 
 
