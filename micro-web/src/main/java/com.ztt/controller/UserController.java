@@ -57,8 +57,8 @@ public class UserController {
 
     @GetMapping("/")
     public String index() {
-        Jedis jedis = new Jedis("172.18.10.41", 6379);
-        jedis.auth("redis!123");
+        Jedis jedis = new Jedis("localhost", 6379);
+        //jedis.auth("");
         jedis.select(15);
         String value = jedis.set("aaa", UUID.randomUUID().toString(), SET_IF_NOT_EXIST, SET_WITH_EXPIRE_TIME, 10000);
         return "你好,docker";

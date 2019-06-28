@@ -10,11 +10,24 @@ eureka:
 
 spring:
   cloud:
+#    gateway:
+#      routes:
+#        predicates:
+#        filters:
+#        uri:
     config:
       discovery:
         enabled: true
         service-id: micro-config
       profile: dev #远程配置文件环境
       uri: http://localhost:3001/
+    gateway:
+      routes:
+        - id: route_service_one
+          uri: http://localhost:8081/ # uri以lb://开头（lb代表从注册中心获取服务），后面接的就是你需要转发到的服务名称
+          predicates:
+            - Path=/web/**
+          filters:
+            - StripPrefix=1 # 表示在转发时去掉web
   application:
     name: zuul #远程配置文件名称
