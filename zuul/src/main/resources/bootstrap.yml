@@ -23,11 +23,21 @@ spring:
       uri: http://localhost:3001/
     gateway:
       routes:
-        - id: route_service_one
+        - id: route_service_web
           uri: http://localhost:8081/ # uri以lb://开头（lb代表从注册中心获取服务），后面接的就是你需要转发到的服务名称
           predicates:
             - Path=/web/**
           filters:
-            - StripPrefix=1 # 表示在转发时去掉web
+            - StripPrefix=1
+            - name: Hystrix  #使用Hystrix熔断器
+              args:
+                name: myfallbackcmd
+                fallbackUri: forward:/user/fallback
+        - id: route_service_message
+            uri: http://localhost:8082/
+            predicates:
+              - Path=/message/**
+            filters:
+              - StripPrefix=1 # 表示在转发时去掉message
   application:
     name: zuul #远程配置文件名称
