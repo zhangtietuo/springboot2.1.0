@@ -33,11 +33,15 @@ spring:
               args:
                 name: myfallbackcmd
                 fallbackUri: forward:/user/fallback
+            # 关键在下面一句，值为true则开启认证，false则不开启
+            # 这种配置方式和spring cloud gateway内置的GatewayFilterFactory一致
+            - Customer=true #配置了路由级别过滤器， 全局过滤器会失效
+
         - id: route_service_message
-            uri: http://localhost:8082/
-            predicates:
-              - Path=/message/**
-            filters:
-              - StripPrefix=1 # 表示在转发时去掉message
+          uri: http://localhost:8082/
+          predicates:
+            - Path=/message/**
+          filters:
+            - StripPrefix=1 # 表示在转发时去掉message
   application:
     name: zuul #远程配置文件名称

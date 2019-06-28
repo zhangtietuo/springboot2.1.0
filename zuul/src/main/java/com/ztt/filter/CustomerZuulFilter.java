@@ -9,7 +9,7 @@ package com.ztt.filter;
  * @since 1.0
  */
 //@Component
-public class CustomerFilter
+public class CustomerZuulFilter
 //        extends ZuulFilter
 {
 
