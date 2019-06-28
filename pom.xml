@@ -15,7 +15,8 @@
 		<module>micro-eureka</module>
 		<module>micro-config</module>
 		<module>zuul</module>
-	</modules>
+        <module>micro-zookeeper</module>
+    </modules>
 
 	<packaging>pom</packaging><!-- 修改为pom代表为父项目 -->
 

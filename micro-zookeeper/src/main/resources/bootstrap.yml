@@ -1,0 +1,12 @@
+server:
+  port: 3003
+
+
+spring:
+  cloud:
+    zookeeper:
+      connect-string: 39.96.74.194:2181
+      discovery:
+        enabled: true
+  application:
+    name: zookeeper
