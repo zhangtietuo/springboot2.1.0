@@ -14,24 +14,29 @@ import java.util.List;
 public class 两个数组的交集II {
 
     public int[] intersect(int[] nums1, int[] nums2) {
-        int num1length1 = nums1.length;
-        int num2length2 = nums2.length;
-        List<Integer> list = new ArrayList();
-        int k = 0;
-        for(int i=0;i<num1length1;i++) {
-            int temp;
-            for(int j = k;j<num2length2;j++) {
-                if(nums1[i] == nums2[j]) {
-                    temp = nums2[k];
-                    nums2[k++] = nums2[j];
-                    nums2[j] = temp;
-                    list.add(nums1[i]);
-                    break;
-                }
+        int length1 = nums1.length;
+        int lengtg2 = nums2.length;
+        Arrays.sort(nums1);
+        Arrays.sort(nums2);
 
+        int i=0,j=0,k=0;
+        while (i<length1 && j<lengtg2){
+            if(nums1[i]==nums2[j]){
+                nums1[k]=nums2[j];
+                k++;
+                i++;
+                j++;
+            }else if(nums1[i]<nums2[j]){
+                i++;
+            }else {
+                j++;
             }
         }
-        return list.stream().mapToInt(Integer::valueOf).toArray();
+        int [] res= new int[k];
+        for (int l = 0; l < k; l++) {
+            res[l] = nums1[l];
+        }
+        return res;
     }
 
     public static void main(String[] args) {
