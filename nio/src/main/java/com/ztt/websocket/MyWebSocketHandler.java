@@ -1,11 +1,10 @@
 package com.ztt.websocket;
 
+import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelFutureListener;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.SimpleChannelInboundHandler;
+import io.netty.channel.*;
 import io.netty.handler.codec.http.DefaultFullHttpResponse;
 import io.netty.handler.codec.http.FullHttpRequest;
 import io.netty.handler.codec.http.HttpResponseStatus;
@@ -15,6 +14,7 @@ import io.netty.util.CharsetUtil;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Iterator;
 
 /**
  * @Auther: zhangtietuo
@@ -36,8 +36,11 @@ public class MyWebSocketHandler extends SimpleChannelInboundHandler<Object> {
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         NettyConstant.channelGroup.add(ctx.channel());
+        NettyConstant.userMap.put(ctx.channel().id().toString(), "");
         TextWebSocketFrame tws = new TextWebSocketFrame("欢迎用户:"+ctx.channel().id()+" 加入ztt的聊天室");
         NettyConstant.channelGroup.writeAndFlush(tws);
+        TextWebSocketFrame userMapInfo = new TextWebSocketFrame(JSONObject.toJSONString(NettyConstant.userMap));
+        NettyConstant.channelGroup.writeAndFlush("人员信息: " + userMapInfo);
         System.out.println("==========客户端与服务端连接开启================");
     }
 
@@ -51,6 +54,9 @@ public class MyWebSocketHandler extends SimpleChannelInboundHandler<Object> {
         NettyConstant.channelGroup.remove(ctx.channel());
         TextWebSocketFrame tws = new TextWebSocketFrame("用户:"+ctx.channel().id()+" 已退出聊天");
         NettyConstant.channelGroup.writeAndFlush(tws);
+        NettyConstant.userMap.remove(ctx.channel().id().toString());
+        TextWebSocketFrame userMapInfo = new TextWebSocketFrame(JSONObject.toJSONString(NettyConstant.userMap));
+        NettyConstant.channelGroup.writeAndFlush("人员信息: " + userMapInfo);
         System.out.println("===============客户端与服务端连接断开===================");
     }
 
