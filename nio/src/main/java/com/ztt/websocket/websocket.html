@@ -2,26 +2,32 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" http-equiv="Content-Type" content="text/html;charset=utf-8">
-    <title>websocket客户端</title>
+    <title>ztt的聊天室</title>
     <script type="text/javascript">
+        var nickname = '大傻逼';
         let socket;
         if(!window.WebSocket) {
             window.WebSocket = window.MozWebSocket;
         }
         if(window.WebSocket) {
+            //socket = new WebSocket('ws://39.96.74.194:8888/websocket');
             socket = new WebSocket('ws://localhost:8888/websocket');
             socket.onmessage = function(event) {
-                alert('onmessage')
+                //alert('onmessage')
                 let ta = document.getElementById('responseContent');
                 ta.value += event.data + '\r\n';
             }
             socket.onopen = function(event) {
-                alert('onopen')
                 let ta = document.getElementById('responseContent');
-                ta.value += '您当前得浏览器支持websocket,请进行后续操作！' + '\r\n';
+                ta.value += '您好，召唤师！' + '\r\n';
+                let name = prompt('请输入您的姓名');
+                if(name != '') {
+                    nickname = name;
+                }
+
             }
             socket.onclose = function(event) {
-                alert('onclose')
+                //alert('onclose')
                 let ta = document.getElementById('responseContent');
                 ta.value = '';
                 ta.value = 'websocket连接已经关闭' + '\r\n';;
@@ -35,7 +41,7 @@
                 return;
             }
             if(socket.readyState == WebSocket.OPEN) {
-                socket.send(msg);
+                socket.send(nickname + "|"+msg);
             } else {
                 alert('websocket没有连接成功 ')
             }
@@ -46,9 +52,9 @@
     <form onsubmit="return false;">
         <input type="text" name="message" value=""/>
         <br/><br/>
-        <input type="button" onclick="send(this.form.message.value)" value="发送websocket请求"/>
+        <input type="button" onclick="send(this.form.message.value)" value="发送信息"/>
         <hr color="red"/>
-        <h2>客户端接收到服务端返回得应答消息</h2>
+        <h2>信息记录</h2>
         <textarea id="responseContent" style="width: 1025px;height: 300px">
 
         </textarea>

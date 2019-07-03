@@ -13,7 +13,8 @@ import io.netty.handler.codec.http.HttpVersion;
 import io.netty.handler.codec.http.websocketx.*;
 import io.netty.util.CharsetUtil;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * @Auther: zhangtietuo
@@ -35,6 +36,8 @@ public class MyWebSocketHandler extends SimpleChannelInboundHandler<Object> {
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         NettyConstant.channelGroup.add(ctx.channel());
+        TextWebSocketFrame tws = new TextWebSocketFrame("欢迎用户:"+ctx.channel().id()+" 加入ztt的聊天室");
+        NettyConstant.channelGroup.writeAndFlush(tws);
         System.out.println("==========客户端与服务端连接开启================");
     }
 
@@ -46,6 +49,8 @@ public class MyWebSocketHandler extends SimpleChannelInboundHandler<Object> {
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
         NettyConstant.channelGroup.remove(ctx.channel());
+        TextWebSocketFrame tws = new TextWebSocketFrame("用户:"+ctx.channel().id()+" 已退出聊天");
+        NettyConstant.channelGroup.writeAndFlush(tws);
         System.out.println("===============客户端与服务端连接断开===================");
     }
 
@@ -150,7 +155,8 @@ public class MyWebSocketHandler extends SimpleChannelInboundHandler<Object> {
         //获取客户端向服务端发送的消息
         String request = ((TextWebSocketFrame) frame).text();
         System.out.println("服务端收到客户端的消息=====》》"+ request);
-        TextWebSocketFrame tws = new TextWebSocketFrame(new Date().toString()+ctx.channel().id()+"=====>>"+ request);
+        String[] requestArr = request.split("\\|");
+        TextWebSocketFrame tws = new TextWebSocketFrame(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) +"  "+requestArr[0]+"("+ctx.channel().id()+")"+":  "+ requestArr[1]);
         //群发，服务端向每个连接上来的客户端群发消息
         NettyConstant.channelGroup.writeAndFlush(tws);
 
