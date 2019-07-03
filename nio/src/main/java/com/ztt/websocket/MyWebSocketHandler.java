@@ -94,6 +94,8 @@ public class MyWebSocketHandler extends SimpleChannelInboundHandler<Object> {
         if(!req.decoderResult().isSuccess() || !("websocket".equals(req.headers().get("Upgrade")))) {
             sendHttpResponse(ctx, req, new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.BAD_REQUEST));
             return;
+        } else {
+            System.out.println("客户端连接服务端");
         }
         WebSocketServerHandshakerFactory wsFactory = new WebSocketServerHandshakerFactory(WEB_SOCKET_URL, null, false);
         handshaker = wsFactory.newHandshaker(req);
