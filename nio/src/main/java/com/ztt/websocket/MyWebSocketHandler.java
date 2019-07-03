@@ -10,10 +10,10 @@ import io.netty.handler.codec.http.DefaultFullHttpResponse;
 import io.netty.handler.codec.http.FullHttpRequest;
 import io.netty.handler.codec.http.HttpResponseStatus;
 import io.netty.handler.codec.http.HttpVersion;
-import io.netty.handler.codec.http.websocketx.WebSocketFrame;
-import io.netty.handler.codec.http.websocketx.WebSocketServerHandshaker;
-import io.netty.handler.codec.http.websocketx.WebSocketServerHandshakerFactory;
+import io.netty.handler.codec.http.websocketx.*;
 import io.netty.util.CharsetUtil;
+
+import java.util.Date;
 
 /**
  * @Auther: zhangtietuo
@@ -80,7 +80,7 @@ public class MyWebSocketHandler extends SimpleChannelInboundHandler<Object> {
         if(msg instanceof FullHttpRequest) {
             handHttpRequest(channelHandlerContext, (FullHttpRequest) msg);
         } else if(msg instanceof WebSocketFrame) {//处理websocket连接业务
-
+            handWesocketFrame(channelHandlerContext, (WebSocketFrame) msg);
         }
     }
 
@@ -106,7 +106,7 @@ public class MyWebSocketHandler extends SimpleChannelInboundHandler<Object> {
     }
 
     /**
-     * 服务端像客户端相应消息
+     * 服务端向客户端相应消息
      * @param ctx
      * @param req
      * @param res
@@ -124,7 +124,33 @@ public class MyWebSocketHandler extends SimpleChannelInboundHandler<Object> {
         }
     }
 
-    private void handWesocketFrame() {
+    /**
+     * 处理服务端与客户端的websocket业务
+     * @param ctx
+     * @param frame
+     */
+    private void handWesocketFrame(ChannelHandlerContext ctx, WebSocketFrame frame) {
+        //判断是否 是关闭websocket的指令
+        if(frame instanceof CloseWebSocketFrame) {
+            handshaker.close(ctx.channel(), ((CloseWebSocketFrame) frame).retain());
+        }
+        //判断是否是ping消息
+        if( frame instanceof PingWebSocketFrame) {
+            ctx.channel().write(new PongWebSocketFrame(frame.content().retain()));
+            return;
+        }
+        //是否是二进制消息 如果是二进制消息 抛出异常
+        if(!(frame instanceof TextWebSocketFrame)) {
+            System.out.println("=============目前不支持二进制消息===============");
+            throw new RuntimeException("【"+this.getClass().getName()+"】不支持消息");
+        }
+        //返回应答消息
+        //获取客户端向服务端发送的消息
+        String request = ((TextWebSocketFrame) frame).text();
+        System.out.println("服务端收到客户端的消息=====》》"+ request);
+        TextWebSocketFrame tws = new TextWebSocketFrame(new Date().toString()+ctx.channel().id()+"=====>>"+ request);
+        //群发，服务端向每个连接上来的客户端群发消息
+        NettyConstant.channelGroup.writeAndFlush(tws);
 
     }
 }
