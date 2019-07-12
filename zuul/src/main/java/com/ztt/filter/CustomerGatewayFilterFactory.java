@@ -14,6 +14,6 @@ public class CustomerGatewayFilterFactory extends AbstractGatewayFilterFactory {
     @Override
     public GatewayFilter apply(Object config) {
         System.out.println("asdsadsadsad");
-        return null;
+        return null;//不能返回null 现在自定义过滤器有问题
     }
 }
