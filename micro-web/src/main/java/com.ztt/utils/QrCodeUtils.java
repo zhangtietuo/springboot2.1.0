@@ -5,15 +5,13 @@ import com.google.zxing.EncodeHintType;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
+import sun.misc.BASE64Encoder;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.util.Hashtable;
 import java.util.Random;
 
@@ -78,6 +76,7 @@ public class QrCodeUtils {
         InputStream inputStream = null;
         try {
             inputStream = FileUtils.getResourceAsStream(logoPath);
+            FileUtils.getResourceAsStream("bootstrap.yml");
             Image src = ImageIO.read(inputStream);
             int width = src.getWidth(null);
             int height = src.getHeight(null);
@@ -209,10 +208,17 @@ public class QrCodeUtils {
      * @param needCompress 是否压缩LOGO
      * @throws Exception
      */
-    public static void encode(String content, String logoPath, OutputStream output, boolean needCompress)
+    public static String encode(String content, String logoPath, OutputStream output, boolean needCompress)
             throws Exception {
         BufferedImage image = QrCodeUtils.createImage(content, logoPath, needCompress);
-        ImageIO.write(image, FORMAT, output);
+        //ImageIO.write(image, FORMAT, output);
+        //转base64
+        BASE64Encoder encoder = new BASE64Encoder();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();//io流
+        ImageIO.write(image, "png", baos);//写入流中
+        byte[] bytes = baos.toByteArray();//转换成字节
+        String png_base64 =  encoder.encodeBuffer(bytes).trim();//转换成base64串
+        return png_base64;
     }
 
     /**

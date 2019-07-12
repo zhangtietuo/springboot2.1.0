@@ -17,21 +17,28 @@ import java.io.OutputStream;
 @RestController
 public class QRController {
 
+    @Autowired
+    HttpServletRequest request;
 
+    @Autowired
+    HttpServletResponse response;
 
     @RequestMapping("/qrcode")
-    public void qrcode(HttpServletRequest request, HttpServletResponse response) {
+    public String qrcode() {
+
         StringBuffer url = request.getRequestURL();
         // 域名
         String tempContextUrl = url.delete(url.length() - request.getRequestURI().length(), url.length()).append("/").toString();
 
         // 再加上请求链接
-        String requestUrl = tempContextUrl + "/index";
+        String requestUrl = "欢迎关注铁托的二维码";
         try {
             OutputStream os = response.getOutputStream();
-            QrCodeUtils.encode(requestUrl, "/static/images/logo.png", os, true);
+            String qrBase64String = QrCodeUtils.encode(requestUrl, "/static/images/logo.png", os, true);
+            return qrBase64String;
         } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
     }
 }

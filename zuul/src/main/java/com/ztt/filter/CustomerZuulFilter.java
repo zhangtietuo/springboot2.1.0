@@ -1,6 +1,8 @@
 package com.ztt.filter;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 /**
  * @author SongChao
  * @version 1.0
@@ -10,9 +12,9 @@ package com.ztt.filter;
  */
 //@Component
 public class CustomerZuulFilter
+
 //        extends ZuulFilter
 {
-
 //    static Logger log = LoggerFactory.getLogger(CustomerFilter.class);
 //
 //    @Override
