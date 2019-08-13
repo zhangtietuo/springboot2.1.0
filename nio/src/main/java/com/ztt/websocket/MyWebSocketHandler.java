@@ -154,8 +154,9 @@ public class MyWebSocketHandler extends SimpleChannelInboundHandler<Object> {
         }
         //是否是二进制消息 如果是二进制消息 抛出异常
         if(!(frame instanceof TextWebSocketFrame)) {
+            frame.toString();
             System.out.println("=============目前不支持二进制消息===============");
-            throw new RuntimeException("【"+this.getClass().getName()+"】不支持消息");
+            //throw new RuntimeException("【"+this.getClass().getName()+"】不支持消息");
         }
         //返回应答消息
         //获取客户端向服务端发送的消息
