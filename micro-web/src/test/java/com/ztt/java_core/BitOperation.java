@@ -14,5 +14,8 @@ public class BitOperation {
         System.out.println("15>>2运算的结果是 :"+(15>>2));
         System.out.println("16>>>2运算的结果是 :"+(16>>>2));
         System.out.println("-16>>2运算的结果是 :"+(-16>>2));
+
+        int a = 0b111;
+        System.out.println(a);
     }
 }
