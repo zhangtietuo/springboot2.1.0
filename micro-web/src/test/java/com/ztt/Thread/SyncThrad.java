@@ -13,7 +13,7 @@ class SyncThread implements Runnable {
         synchronized(this) {
             for (int i = 0; i < 5; i++) {
                 try {
-                    System.out.println(Thread.currentThread().getName() + ":" + (count++));
+                    System.out.println(Thread.currentThread().getName() + ":" + i + ":" + (count++));
                     Thread.sleep(100);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
