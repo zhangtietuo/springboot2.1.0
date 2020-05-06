@@ -17,7 +17,8 @@
 		<module>zuul</module>
         <module>micro-zookeeper</module>
         <module>nio</module>
-    </modules>
+		<module>es</module>
+	</modules>
 
 	<packaging>pom</packaging><!-- 修改为pom代表为父项目 -->
 
