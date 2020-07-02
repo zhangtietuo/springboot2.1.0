@@ -1,4 +1,4 @@
-package com.ztt.designMode.FactoryMethodMode;
+package com.ztt.designMode.C_FactoryMethodMode;
 
 /**
  * @Auther: zhangtietuo
