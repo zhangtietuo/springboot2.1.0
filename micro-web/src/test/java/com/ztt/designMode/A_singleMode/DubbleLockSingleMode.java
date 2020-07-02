@@ -1,4 +1,4 @@
-package com.ztt.designMode.singleMode;
+package com.ztt.designMode.A_singleMode;
 
 /**
  * @Auther: zhangtietuo
