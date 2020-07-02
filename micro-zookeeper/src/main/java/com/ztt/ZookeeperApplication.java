@@ -6,12 +6,11 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
  * Hello world!
- *
  */
 @SpringBootApplication
 @EnableDiscoveryClient
 public class ZookeeperApplication {
-    public static void main( String[] args ) {
+    public static void main(String[] args) {
         SpringApplication.run(ZookeeperApplication.class);
     }
 }

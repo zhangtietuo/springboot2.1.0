@@ -87,7 +87,7 @@ public class UserController {
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);
         subject.login(token);
-        if(subject.hasRole("admin")) {
+        if (subject.hasRole("admin")) {
             return "admin";
         }
 

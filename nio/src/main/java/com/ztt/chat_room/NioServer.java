@@ -10,7 +10,6 @@ import java.util.Set;
 
 /**
  * Hello world!
- *
  */
 public class NioServer {
 
@@ -29,18 +28,18 @@ public class NioServer {
         //6. 循环等待新接入通道(连接)
         while (true) {
             int readyChannels = selector.select();
-            if(0 == readyChannels) {
+            if (0 == readyChannels) {
                 continue;
             }
             Set<SelectionKey> keys = selector.selectedKeys();
-            Iterator iterator =  keys.iterator();
+            Iterator iterator = keys.iterator();
             while (iterator.hasNext()) {
                 SelectionKey selectionKey = (SelectionKey) iterator.next();
                 iterator.remove();
-                if(selectionKey.isAcceptable()) {
+                if (selectionKey.isAcceptable()) {
                     acceptHandler(serverSocketChannel, selector);
                 }
-                if(selectionKey.isReadable()) {
+                if (selectionKey.isReadable()) {
                     readHandler(selectionKey, selector);
                 }
             }
@@ -70,14 +69,14 @@ public class NioServer {
         ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
         //循环读取客户端请求信息
         String request = "";
-        while (socketChannel.read(byteBuffer)> 0) {
+        while (socketChannel.read(byteBuffer) > 0) {
             byteBuffer.flip();
             request = Charset.forName("UTF-8").decode(byteBuffer).toString();
         }
         //将channel再次注册到selector上，监听她的可读事件
         socketChannel.register(selector, SelectionKey.OP_READ, "服务器read");
         //将客户端发送的请i去信息 广播给其它客户端
-        if(request.length()>0) {
+        if (request.length() > 0) {
             System.out.println(request);
             boardCast(selector, socketChannel, request);
         }
@@ -91,7 +90,7 @@ public class NioServer {
         Set<SelectionKey> keys = selector.keys();
         keys.forEach(selectionKey -> {
             Channel targetChannel = selectionKey.channel();
-            if(targetChannel instanceof SocketChannel && targetChannel != sourceChannel) {
+            if (targetChannel instanceof SocketChannel && targetChannel != sourceChannel) {
                 try {
                     ((SocketChannel) targetChannel).write(Charset.forName("UTF-8").encode(request));
                 } catch (IOException e) {
@@ -102,7 +101,7 @@ public class NioServer {
         //循环向所有channel广播信息
     }
 
-    public static void main( String[] args ) throws IOException {
+    public static void main(String[] args) throws IOException {
         new NioServer().start();
     }
 }

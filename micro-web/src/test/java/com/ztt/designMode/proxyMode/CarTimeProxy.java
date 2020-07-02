@@ -18,6 +18,6 @@ public class CarTimeProxy implements Moveable {
         long startTime = System.currentTimeMillis();
         m.move();
         long endTime = System.currentTimeMillis();
-        System.out.println("🚵行驶时间为:"+(endTime-startTime)+"ms");
+        System.out.println("🚵行驶时间为:" + (endTime - startTime) + "ms");
     }
 }

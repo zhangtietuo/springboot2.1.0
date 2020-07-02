@@ -14,8 +14,8 @@ public interface Log {
     void info(String desc);
 
     default void error(String name) {
-        if(a) {
-            System.out.println("ztt="+name);
+        if (a) {
+            System.out.println("ztt=" + name);
         }
     }
 }

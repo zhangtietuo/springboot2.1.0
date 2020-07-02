@@ -7,6 +7,7 @@ package com.ztt.practice;
  */
 public class B extends A {
     public int z1 = 11;
+
     public void m1() {
         System.out.println("B");
     }

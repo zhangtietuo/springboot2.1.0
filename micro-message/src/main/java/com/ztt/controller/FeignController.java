@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class FeignController {
 
-    @RequestMapping(value = "/hi",method = RequestMethod.GET)
+    @RequestMapping(value = "/hi", method = RequestMethod.GET)
     public String sayHiFromFeignServer(@RequestParam(value = "name") String name) {
         return "hello" + name;
     }

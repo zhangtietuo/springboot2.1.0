@@ -6,30 +6,30 @@ package com.java8.InterfaceDefaultMethod;
  * @Date: 2018/5/21 16:11
  */
 public class InterfaceDefaultMethod {
-    public static void main(String args[]){
+    public static void main(String args[]) {
         Vehicle vehicle = new Car();
         vehicle.print();
     }
 }
 
 interface Vehicle {
-    default void print(){
+    default void print() {
         System.out.println("我是一辆车!");
     }
 
-    static void blowHorn(){
+    static void blowHorn() {
         System.out.println("按喇叭!!!");
     }
 }
 
 interface FourWheeler {
-    default void print(){
+    default void print() {
         System.out.println("我是一辆四轮车!");
     }
 }
 
 class Car implements Vehicle, FourWheeler {
-    public void print(){
+    public void print() {
         Vehicle.super.print();
         FourWheeler.super.print();
         Vehicle.blowHorn();

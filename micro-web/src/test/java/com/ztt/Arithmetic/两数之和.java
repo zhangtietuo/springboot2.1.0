@@ -16,7 +16,7 @@ public class 两数之和 {
         for (int i = 0; i < nums.length; i++) {
             int complement = target - nums[i];
             if (map.containsKey(complement)) {
-                return new int[] { map.get(complement), i };
+                return new int[]{map.get(complement), i};
             }
             map.put(nums[i], i);
         }
@@ -24,7 +24,7 @@ public class 两数之和 {
     }
 
     public static void main(String[] args) {
-        int[] request = {3,2,4};
+        int[] request = {3, 2, 4};
         twoSum(request, 6);
     }
 }

@@ -22,7 +22,7 @@ public class UserRepository {
      */
     private final ConcurrentMap<Long, User> repository = new ConcurrentHashMap<>();
 
-   private final static AtomicLong idGenerator = new AtomicLong();
+    private final static AtomicLong idGenerator = new AtomicLong();
 
     public boolean save(User user) {
         Long id = idGenerator.incrementAndGet();
@@ -32,7 +32,7 @@ public class UserRepository {
 
     public List<User> findAll() {
         List<User> users = new ArrayList<>();
-        for(Map.Entry<Long, User> entry: repository.entrySet()) {
+        for (Map.Entry<Long, User> entry : repository.entrySet()) {
             users.add(entry.getValue());
         }
         return users;

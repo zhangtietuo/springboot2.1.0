@@ -10,29 +10,23 @@ public class ExceptionAndErrorAndTryCatch {
     public static void main(String[] args) {
         System.out.println(new ExceptionAndErrorAndTryCatch().test());
     }
-    static int test()
-    {
+
+    static int test() {
         int x = 1;
-        try
-        {
+        try {
             x++;
             return x;
-        }
-        finally
-        {
+        } finally {
             ++x;
             System.out.println(x);
         }
     }
-    static int test1()
-    {
+
+    static int test1() {
         int x = 1;
-        try
-        {
+        try {
             return x++;
-        }
-        finally
-        {
+        } finally {
             return ++x;
         }
     }

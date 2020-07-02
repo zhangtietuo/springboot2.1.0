@@ -11,7 +11,7 @@ import java.util.UUID;
  */
 public class Base64Tester {
 
-    public static void main(String args[]){
+    public static void main(String args[]) {
         try {
 
             // 使用基本编码
@@ -35,7 +35,7 @@ public class Base64Tester {
             String mimeEncodedString = Base64.getMimeEncoder().encodeToString(mimeBytes);//可以换行
             System.out.println("Base64 编码字符串 (MIME) :" + mimeEncodedString);
 
-        }catch(UnsupportedEncodingException e){
+        } catch (UnsupportedEncodingException e) {
             System.out.println("Error :" + e.getMessage());
         }
     }

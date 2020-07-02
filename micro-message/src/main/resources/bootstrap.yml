@@ -5,8 +5,8 @@ eureka:
     serviceUrl:
       defaultZone: http://localhost:3000/eureka/
   instance:
-      lease-expiration-duration-in-seconds: 2
-      lease-renewal-interval-in-seconds:  1
+    lease-expiration-duration-in-seconds: 2
+    lease-renewal-interval-in-seconds:  1
 
 spring:
   cloud:

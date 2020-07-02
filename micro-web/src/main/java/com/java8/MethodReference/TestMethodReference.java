@@ -1,7 +1,6 @@
 package com.java8.MethodReference;
 
 
-
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -19,10 +18,10 @@ public class TestMethodReference {
 
     public static void main(String[] args) {
         Person[] pArr = new Person[]{
-                new Person("003", LocalDate.of(2016,9,1)),
-                new Person("001", LocalDate.of(2016,2,1)),
-                new Person("002", LocalDate.of(2016,3,1)),
-                new Person("004", LocalDate.of(2016,12,1))};
+                new Person("003", LocalDate.of(2016, 9, 1)),
+                new Person("001", LocalDate.of(2016, 2, 1)),
+                new Person("002", LocalDate.of(2016, 3, 1)),
+                new Person("004", LocalDate.of(2016, 12, 1))};
 
         // 使用匿名类
         /*Arrays.sort(pArr, new Comparator<Person>() {
@@ -46,7 +45,7 @@ public class TestMethodReference {
         System.out.println(Arrays.asList(pArr));
 
         //引用对象的实例方法
-        Person person = new Person("005", LocalDate.of(1993,1,30));
+        Person person = new Person("005", LocalDate.of(1993, 1, 30));
 //        Supplier<LocalDate> supp = person::getBirthday;
 //        System.out.println(supp.get());
 
@@ -62,8 +61,8 @@ public class TestMethodReference {
 //        System.out.println(supp1);
 
         //实例化一个长度为10的数组
-        Function<Integer,String[]> supp2=String[]::new;
-        String[] array=supp2.apply(10);
+        Function<Integer, String[]> supp2 = String[]::new;
+        String[] array = supp2.apply(10);
         System.out.println(array.length);
 
     }

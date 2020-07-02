@@ -9,8 +9,8 @@ class SyncThread implements Runnable {
     }
 
     public synchronized void run() {
-        System.out.println(Thread.currentThread().getName()+ "====RUN");
-        synchronized(this) {
+        System.out.println(Thread.currentThread().getName() + "====RUN");
+        synchronized (this) {
             for (int i = 0; i < 5; i++) {
                 try {
                     System.out.println(Thread.currentThread().getName() + ":" + i + ":" + (count++));

@@ -22,7 +22,7 @@ public class Subject {
     }
 
     protected void notifyObservers() {
-        for(Observer observer: observerList) {
+        for (Observer observer : observerList) {
             observer.update(this);
         }
     }

@@ -30,12 +30,12 @@ public class MethodReferenceTester {
     }
 
     public static void main(String[] args) {
-        final MethodReferenceTester methodReferenceTester = create( MethodReferenceTester::new );
+        final MethodReferenceTester methodReferenceTester = create(MethodReferenceTester::new);
         final List<MethodReferenceTester> methodReferenceTesters = Arrays.asList(methodReferenceTester);
-        methodReferenceTesters.forEach( MethodReferenceTester::collide );
-        methodReferenceTesters.forEach( MethodReferenceTester::repair );
-        final MethodReferenceTester police = MethodReferenceTester.create( MethodReferenceTester::new );
-        methodReferenceTesters.forEach( police::follow );
+        methodReferenceTesters.forEach(MethodReferenceTester::collide);
+        methodReferenceTesters.forEach(MethodReferenceTester::repair);
+        final MethodReferenceTester police = MethodReferenceTester.create(MethodReferenceTester::new);
+        methodReferenceTesters.forEach(police::follow);
 
         List names = new ArrayList();
 

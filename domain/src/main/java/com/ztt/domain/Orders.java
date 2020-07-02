@@ -32,7 +32,6 @@ public class Orders {
      * This method returns the value of the database column orders.id
      *
      * @return the value of orders.id
-     *
      * @mbggenerated Wed May 23 09:11:03 CST 2018
      */
     public Long getId() {
@@ -44,7 +43,6 @@ public class Orders {
      * This method sets the value of the database column orders.id
      *
      * @param id the value for orders.id
-     *
      * @mbggenerated Wed May 23 09:11:03 CST 2018
      */
     public void setId(Long id) {
@@ -56,7 +54,6 @@ public class Orders {
      * This method returns the value of the database column orders.nickname
      *
      * @return the value of orders.nickname
-     *
      * @mbggenerated Wed May 23 09:11:03 CST 2018
      */
     public String getNickname() {
@@ -68,7 +65,6 @@ public class Orders {
      * This method sets the value of the database column orders.nickname
      *
      * @param nickname the value for orders.nickname
-     *
      * @mbggenerated Wed May 23 09:11:03 CST 2018
      */
     public void setNickname(String nickname) {
@@ -80,7 +76,6 @@ public class Orders {
      * This method returns the value of the database column orders.createTime
      *
      * @return the value of orders.createTime
-     *
      * @mbggenerated Wed May 23 09:11:03 CST 2018
      */
     public Date getCreatetime() {
@@ -92,7 +87,6 @@ public class Orders {
      * This method sets the value of the database column orders.createTime
      *
      * @param createtime the value for orders.createTime
-     *
      * @mbggenerated Wed May 23 09:11:03 CST 2018
      */
     public void setCreatetime(Date createtime) {

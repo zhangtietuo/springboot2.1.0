@@ -43,13 +43,13 @@ public class OrdersRouterFunctionConfiguration {
     public RouterFunction<ServerResponse> orders(OrdersService ordersService) {//spring 4种注入方式？
         OrdersRouterFunctionConfiguration handler = new OrdersRouterFunctionConfiguration();
         return route(RequestPredicates.GET("/orders"),
-                    request ->{//lambda表达式
-                        List<Orders> orders = ordersService.findAll();
-                        //Stream<User> userStream = users.stream();
-                        //Flux<User> userFlux = Flux.fromStream(userStream);
-                        Flux<Orders> ordersFlux = Flux.fromIterable(orders);
-                        return ServerResponse.ok().body(ordersFlux, Orders.class);
-                    });
+                request -> {//lambda表达式
+                    List<Orders> orders = ordersService.findAll();
+                    //Stream<User> userStream = users.stream();
+                    //Flux<User> userFlux = Flux.fromStream(userStream);
+                    Flux<Orders> ordersFlux = Flux.fromIterable(orders);
+                    return ServerResponse.ok().body(ordersFlux, Orders.class);
+                });
     }
 
 }

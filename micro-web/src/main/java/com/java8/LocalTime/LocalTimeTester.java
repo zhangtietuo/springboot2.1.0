@@ -13,12 +13,12 @@ import java.util.Date;
  */
 public class LocalTimeTester {
 
-    public static void main(String args[]){
+    public static void main(String args[]) {
         LocalTimeTester java8tester = new LocalTimeTester();
         java8tester.testLocalDateTime();
     }
 
-    public void testLocalDateTime(){
+    public void testLocalDateTime() {
 
         // 获取当前的日期时间
         LocalDateTime currentTime = LocalDateTime.now();
@@ -34,7 +34,7 @@ public class LocalTimeTester {
         int day = currentTime.getDayOfMonth();
         int seconds = currentTime.getSecond();
 
-        System.out.println("月: " + month +", 日: " + day +", 秒: " + seconds);
+        System.out.println("月: " + month + ", 日: " + day + ", 秒: " + seconds);
 
         LocalDateTime date2 = currentTime.withDayOfMonth(10).withYear(2012);
         System.out.println("date2: " + date2);

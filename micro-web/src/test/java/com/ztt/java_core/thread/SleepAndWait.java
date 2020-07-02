@@ -9,18 +9,17 @@ public class SleepAndWait {
 
 
     public static void main(String[] args) {
-    new Thread(new Thread1()).start();
-    try {
-        Thread.sleep(5000);
-    } catch (InterruptedException e) {
-        e.printStackTrace();
+        new Thread(new Thread1()).start();
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        new Thread(new Thread2()).start();
     }
-    new Thread(new Thread2()).start();
-}
 
 
-    private static class Thread1 implements Runnable
-    {
+    private static class Thread1 implements Runnable {
 
         @Override
         public void run() {
@@ -44,8 +43,7 @@ public class SleepAndWait {
 
     }
 
-    private static class Thread2 implements Runnable
-    {
+    private static class Thread2 implements Runnable {
 
         @Override
         public void run() {

@@ -1,5 +1,7 @@
 package com.ztt.java_core.thread;
 
+import java.util.concurrent.Callable;
+
 /**
  * @Auther: zhangtietuo
  * @Description:
@@ -8,14 +10,14 @@ package com.ztt.java_core.thread;
 public class ThreadDemo01 {
 
     public static void main(String[] args) throws InterruptedException {
-        Thread t1 = new Thread(new RunnableDemo("A"));
+        Thread t1 = new Thread(new ThreadDemo("A"));
         //Thread t2 = new Thread(new RunnableDemo("B"));
         System.out.println(t1.isAlive());
         t1.start();
         System.out.println(t1.isAlive());
         //t2.start();
-        for(int i=0;i<50;i++) {
-            if(i>10) {
+        for (int i = 0; i < 50; i++) {
+            if (i > 10) {
                 t1.join();
                 /**join方法可以传递参数，join(10)表示main线程会等待t1线程10毫秒，10毫秒过去后，
                  * main线程和t1线程之间执行顺序由串行执行变为普通的并行执行
@@ -23,7 +25,7 @@ public class ThreadDemo01 {
                  */
                 //t1.join(1);
             }
-            System.out.println("主线程："+ i);
+            System.out.println("主线程：" + i);
         }
     }
 
@@ -40,9 +42,35 @@ class RunnableDemo implements Runnable {
 
     @Override
     public void run() {
-        for(int i=0;i<50;i++) {
-            System.out.println(name+":"+i);
+        for (int i = 0; i < 50; i++) {
+            System.out.println(name + ":" + i);
             System.out.println(Thread.currentThread().getName());
         }
+    }
+}
+
+class ThreadDemo extends Thread {
+
+    private String name;
+
+    public ThreadDemo(String name) {
+        this.name = name;
+    }
+
+
+    @Override
+    public void run() {
+        for (int i = 0; i < 50; i++) {
+            System.out.println(name + ":" + i);
+            System.out.println(Thread.currentThread().getName());
+        }
+    }
+}
+
+class CallableDemo implements Callable<Integer> {
+    @Override
+    public Integer call() throws Exception {
+        System.out.println("实现callable的形式创建的线程");
+        return 1024;
     }
 }

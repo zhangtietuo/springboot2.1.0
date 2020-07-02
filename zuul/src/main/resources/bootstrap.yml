@@ -5,16 +5,16 @@ eureka:
     serviceUrl:
       defaultZone: http://localhost:3000/eureka/
   instance:
-      lease-expiration-duration-in-seconds: 2
-      lease-renewal-interval-in-seconds:  1
+    lease-expiration-duration-in-seconds: 2
+    lease-renewal-interval-in-seconds:  1
 
 spring:
   cloud:
-#    gateway:
-#      routes:
-#        predicates:
-#        filters:
-#        uri:
+    #    gateway:
+    #      routes:
+    #        predicates:
+    #        filters:
+    #        uri:
     config:
       discovery:
         enabled: true
@@ -23,29 +23,29 @@ spring:
       uri: http://localhost:3001/
     gateway:
       routes:
-      - id: route_service_web
-        uri: lb://web # uri以lb://开头（lb代表从注册中心获取服务），后面接的就是你需要转发到的服务名称
-        predicates:
-        - Path=/web/**
-        filters:
-        - StripPrefix=1
-        - name: Hystrix  #使用Hystrix熔断器
-          args:
-            name: myfallbackcmd
-            fallbackUri: forward:/user/fallback
-        # 关键在下面一句，值为true则开启认证，false则不开启
-        # 这种配置方式和spring cloud gateway内置的GatewayFilterFactory一致
-        #- Customer=true #配置了路由级别过滤器， 全局过滤器会失效（现在自定义过滤器有问题）
+        - id: route_service_web
+          uri: lb://web # uri以lb://开头（lb代表从注册中心获取服务），后面接的就是你需要转发到的服务名称
+          predicates:
+            - Path=/web/**
+          filters:
+            - StripPrefix=1
+            - name: Hystrix  #使用Hystrix熔断器
+              args:
+                name: myfallbackcmd
+                fallbackUri: forward:/user/fallback
+          # 关键在下面一句，值为true则开启认证，false则不开启
+          # 这种配置方式和spring cloud gateway内置的GatewayFilterFactory一致
+          #- Customer=true #配置了路由级别过滤器， 全局过滤器会失效（现在自定义过滤器有问题）
 
-      - id: route_service_message
-        uri: lb://message
-        predicates:
-          - Path=/message/**
-        filters:
-        - StripPrefix=1 # 表示在转发时去掉message
-        - name: Hystrix  #使用Hystrix熔断器
-          args:
-            name: myfallbackcmd
-            fallbackUri: forward:/user/fallback
+        - id: route_service_message
+          uri: lb://message
+          predicates:
+            - Path=/message/**
+          filters:
+            - StripPrefix=1 # 表示在转发时去掉message
+            - name: Hystrix  #使用Hystrix熔断器
+              args:
+                name: myfallbackcmd
+                fallbackUri: forward:/user/fallback
   application:
     name: zuul #远程配置文件名称

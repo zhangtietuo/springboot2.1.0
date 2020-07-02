@@ -15,7 +15,7 @@ import java.util.Date;
  * Created by zhangtietuo on 2018/4/17.
  */
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     private static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
 
@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public User save(User user) {
         user.setCreateDate(new Date());
-        if(userRepository.save(user)) {
+        if (userRepository.save(user)) {
             log.info("用户保存成功,{}", user);
         } else {
             log.error("用户保存失败{}", user);

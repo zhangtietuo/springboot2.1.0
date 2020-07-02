@@ -22,13 +22,13 @@ public class CglibProxy implements MethodInterceptor {
     }
 
     /**
+     * @param o           目标类实例
+     * @param method      目标方法的反射对象
+     * @param objects     方法的参数
+     * @param methodProxy 代理类的实例
      * @date:2019/1/17 14:26
      * @author:zhangtietuo
      * @description:
-     * @param o 目标类实例
-     * @param method 目标方法的反射对象
-     * @param objects 方法的参数
-     * @param methodProxy 代理类的实例
      */
     @Override
     public Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {

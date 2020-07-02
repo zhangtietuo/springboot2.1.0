@@ -217,7 +217,7 @@ public class QrCodeUtils {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();//io流
         ImageIO.write(image, "png", baos);//写入流中
         byte[] bytes = baos.toByteArray();//转换成字节
-        String png_base64 =  encoder.encodeBuffer(bytes).trim();//转换成base64串
+        String png_base64 = encoder.encodeBuffer(bytes).trim();//转换成base64串
         return png_base64;
     }
 

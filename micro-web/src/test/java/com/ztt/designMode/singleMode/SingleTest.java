@@ -8,7 +8,12 @@ package com.ztt.designMode.singleMode;
 public class SingleTest {
 
     public static void main(String[] args) {
-        LazySingleMode lazySingleMode = LazySingleMode.getInstance();
+        HungrySingleton hungrySingleton = HungrySingleton.getInstance();
+        System.out.println(hungrySingleton.getName());
+        hungrySingleton.setName("1");
+        hungrySingleton.setName("2");
+        System.out.println(hungrySingleton.getName());
+        LazySingleton lazySingleton = LazySingleton.getInstance();
 
         Thread t1 = new Thread(new Runnable() {
 
@@ -16,7 +21,7 @@ public class SingleTest {
             public void run() {
                 System.out.println(DubbleLockSingleMode.getInstance().hashCode());
             }
-        },"t1");
+        }, "t1");
 
         Thread t2 = new Thread(new Runnable() {
 
@@ -24,7 +29,7 @@ public class SingleTest {
             public void run() {
                 System.out.println(DubbleLockSingleMode.getInstance().hashCode());
             }
-        },"t2");
+        }, "t2");
 
         Thread t3 = new Thread(new Runnable() {
 
@@ -32,7 +37,7 @@ public class SingleTest {
             public void run() {
                 System.out.println(DubbleLockSingleMode.getInstance().hashCode());
             }
-        },"t3");
+        }, "t3");
 
         t1.start();
         t2.start();

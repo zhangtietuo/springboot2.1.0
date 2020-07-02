@@ -9,9 +9,11 @@ public class HelloA {
     public HelloA() {
         System.out.println("HelloA");
     }
+
     {
         System.out.println("im a class");
     }
+
     static {
         System.out.println("im static a ");
     }

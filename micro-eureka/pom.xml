@@ -22,7 +22,6 @@
     </properties>
 
 
-
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-eureka -->
         <dependency>

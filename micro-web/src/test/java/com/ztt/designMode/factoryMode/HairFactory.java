@@ -9,14 +9,15 @@ public class HairFactory {
 
     /**
      * 普通方法
+     *
      * @param key
      * @return
      */
     public HairInterface getHair(String key) {
-        if("left".equals(key)) {
+        if ("left".equals(key)) {
             HairInterface leftHair = new LeftHair();
             return leftHair;
-        } else if("right".equals(key)) {
+        } else if ("right".equals(key)) {
             HairInterface rightHair = new RightHair();
             return rightHair;
         } else {
@@ -27,6 +28,7 @@ public class HairFactory {
 
     /**
      * 反射方法
+     *
      * @param key
      * @return
      */

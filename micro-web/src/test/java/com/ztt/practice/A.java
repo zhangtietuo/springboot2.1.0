@@ -7,6 +7,7 @@ package com.ztt.practice;
  */
 public class A {
     public int z = 10;
+
     public void m() {
         System.out.println("A");
     }

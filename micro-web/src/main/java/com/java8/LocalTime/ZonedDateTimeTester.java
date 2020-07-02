@@ -10,12 +10,12 @@ import java.time.ZonedDateTime;
  */
 public class ZonedDateTimeTester {
 
-    public static void main(String args[]){
+    public static void main(String args[]) {
         ZonedDateTimeTester java8tester = new ZonedDateTimeTester();
         java8tester.testZonedDateTime();
     }
 
-    public void testZonedDateTime(){
+    public void testZonedDateTime() {
 
         // 获取当前时间日期
         ZonedDateTime date1 = ZonedDateTime.parse("2015-12-03T10:15:30+05:30[Asia/Shanghai]");

@@ -33,25 +33,24 @@ public class Synchronized {
 class RunnableDemo2 implements Runnable {
 
 
-
     private int ticket = 5;
     Lock lock = new ReentrantLock();
 
 
     @Override
     public void run() {
-        for(int i=0;i<10;i++) {
+        for (int i = 0; i < 10; i++) {
             //System.out.println(Thread.currentThread().getName()+ ":"+i);
             //synchronized (this) {
             lock.lock();
-                if (ticket > 0) {
-                    try {
-                        Thread.sleep(1500);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    System.out.println(Thread.currentThread().getName() + "第" + (i + 1) + "次车票:" + ticket--);
+            if (ticket > 0) {
+                try {
+                    Thread.sleep(1500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
+                System.out.println(Thread.currentThread().getName() + "第" + (i + 1) + "次车票:" + ticket--);
+            }
             lock.unlock();
             //}
         }

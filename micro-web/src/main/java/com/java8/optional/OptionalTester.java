@@ -9,7 +9,7 @@ import java.util.Optional;
  */
 public class OptionalTester {
 
-    public static void main(String args[]){
+    public static void main(String args[]) {
 
         OptionalTester optionalTester = new OptionalTester();
         Integer value1 = null;
@@ -20,10 +20,10 @@ public class OptionalTester {
 
         // Optional.of - 如果传递的参数是 null，抛出异常 NullPointerException
         Optional<Integer> b = Optional.of(value2);
-        System.out.println(optionalTester.sum(a,b));
+        System.out.println(optionalTester.sum(a, b));
     }
 
-    public Integer sum(Optional<Integer> a, Optional<Integer> b){
+    public Integer sum(Optional<Integer> a, Optional<Integer> b) {
 
         // Optional.isPresent - 判断值是否存在
 

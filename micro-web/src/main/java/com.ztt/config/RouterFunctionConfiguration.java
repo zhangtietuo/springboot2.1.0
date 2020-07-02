@@ -40,50 +40,50 @@ public class RouterFunctionConfiguration {
     public RouterFunction<ServerResponse> persons(UserService userService, UserRepository userRepository) {//spring 4种注入方式？
         RouterFunctionConfiguration handler = new RouterFunctionConfiguration();
         return route(RequestPredicates.GET("/persons"),
-                    request ->{//lambda表达式
-                        List<User> users = userRepository.findAll();
-                        //Stream<User> userStream = users.stream();
-                        //Flux<User> userFlux = Flux.fromStream(userStream);
-                        Flux<User> userFlux = Flux.fromIterable(users);
-                        return ServerResponse.ok().body(userFlux, User.class);
-                    }).and(
-                        route(RequestPredicates.GET("/persons/{uid}"),
-                            request ->{//lambda表达式
-                                String uid = request.pathVariable("uid");
-                                //request.queryParam("uid");
-                                User user = userRepository.findById(Long.valueOf(uid));
-                                Mono<User> userMono = Mono.just(user);
-                                return ServerResponse.ok().body(userMono, User.class);
+                request -> {//lambda表达式
+                    List<User> users = userRepository.findAll();
+                    //Stream<User> userStream = users.stream();
+                    //Flux<User> userFlux = Flux.fromStream(userStream);
+                    Flux<User> userFlux = Flux.fromIterable(users);
+                    return ServerResponse.ok().body(userFlux, User.class);
+                }).and(
+                route(RequestPredicates.GET("/persons/{uid}"),
+                        request -> {//lambda表达式
+                            String uid = request.pathVariable("uid");
+                            //request.queryParam("uid");
+                            User user = userRepository.findById(Long.valueOf(uid));
+                            Mono<User> userMono = Mono.just(user);
+                            return ServerResponse.ok().body(userMono, User.class);
                         })
-                    ).and(
-                        route(RequestPredicates.DELETE("/persons/{uid}"),
-                            request ->{//lambda表达式
-                                String uid = request.pathVariable("uid");
-                                //request.queryParam("uid");
-                                User user = userRepository.delById(Long.valueOf(uid));
-                                return ServerResponse.ok().body(Mono.just(user), User.class);
+        ).and(
+                route(RequestPredicates.DELETE("/persons/{uid}"),
+                        request -> {//lambda表达式
+                            String uid = request.pathVariable("uid");
+                            //request.queryParam("uid");
+                            User user = userRepository.delById(Long.valueOf(uid));
+                            return ServerResponse.ok().body(Mono.just(user), User.class);
                         })
-                    ).and( //未实现
-                        route(RequestPredicates.PUT("/persons/{uid}"),
-                                request ->{//lambda表达式
-                                    String uid = request.pathVariable("uid");
-                                    //request.queryParam("uid");
-                                    User user = userRepository.update(Long.valueOf(uid));
-                                    return ServerResponse.ok().body(Mono.just(user), User.class);
-                                })
-                    ).and( //未实现
-                        route(POST("/persons").and(RequestPredicates.accept(MediaType.APPLICATION_JSON)),
-                                request ->{//lambda表达式
-                                    Mono<User> addUser = request.bodyToMono(User.class);
-                                    User user = userService.save(addUser.block().getName());
-                                    return ServerResponse.ok().body(Mono.just(user), User.class);
-                                })
-                    ).filter((request, next) -> {
-                        System.out.println("Before handler invocation: " + request.path());
-                        Mono<ServerResponse> response = next.handle(request);
-                        System.out.println("After handler invocation: " + response);
-                        return response;
-                    });
+        ).and( //未实现
+                route(RequestPredicates.PUT("/persons/{uid}"),
+                        request -> {//lambda表达式
+                            String uid = request.pathVariable("uid");
+                            //request.queryParam("uid");
+                            User user = userRepository.update(Long.valueOf(uid));
+                            return ServerResponse.ok().body(Mono.just(user), User.class);
+                        })
+        ).and( //未实现
+                route(POST("/persons").and(RequestPredicates.accept(MediaType.APPLICATION_JSON)),
+                        request -> {//lambda表达式
+                            Mono<User> addUser = request.bodyToMono(User.class);
+                            User user = userService.save(addUser.block().getName());
+                            return ServerResponse.ok().body(Mono.just(user), User.class);
+                        })
+        ).filter((request, next) -> {
+            System.out.println("Before handler invocation: " + request.path());
+            Mono<ServerResponse> response = next.handle(request);
+            System.out.println("After handler invocation: " + response);
+            return response;
+        });
     }
 
 }

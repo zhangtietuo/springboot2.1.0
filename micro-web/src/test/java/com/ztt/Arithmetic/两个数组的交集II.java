@@ -19,20 +19,20 @@ public class 两个数组的交集II {
         Arrays.sort(nums1);
         Arrays.sort(nums2);
 
-        int i=0,j=0,k=0;
-        while (i<length1 && j<lengtg2){
-            if(nums1[i]==nums2[j]){
-                nums1[k]=nums2[j];
+        int i = 0, j = 0, k = 0;
+        while (i < length1 && j < lengtg2) {
+            if (nums1[i] == nums2[j]) {
+                nums1[k] = nums2[j];
                 k++;
                 i++;
                 j++;
-            }else if(nums1[i]<nums2[j]){
+            } else if (nums1[i] < nums2[j]) {
                 i++;
-            }else {
+            } else {
                 j++;
             }
         }
-        int [] res= new int[k];
+        int[] res = new int[k];
         for (int l = 0; l < k; l++) {
             res[l] = nums1[l];
         }

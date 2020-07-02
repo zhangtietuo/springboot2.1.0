@@ -13,7 +13,7 @@ public class Demo {
         A a2 = new B();
         a2.m();
         System.out.println(a2.z);
-        B b1 = (B)a2;
+        B b1 = (B) a2;
         b1.m();
         System.out.println(b1.z);
         B b2 = new B();

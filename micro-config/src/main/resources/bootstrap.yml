@@ -3,8 +3,8 @@ eureka:
     serviceUrl:
       defaultZone: http://localhost:3000/eureka/
   instance:
-      lease-expiration-duration-in-seconds: 2
-      lease-renewal-interval-in-seconds:  1
+    lease-expiration-duration-in-seconds: 2
+    lease-renewal-interval-in-seconds:  1
 
 server:
   port: 3001
@@ -25,7 +25,7 @@ spring:
       username: 740890845@qq.com
       password: Qq740890845
   application:
-      name: micro-config
+    name: micro-config
 
 
 

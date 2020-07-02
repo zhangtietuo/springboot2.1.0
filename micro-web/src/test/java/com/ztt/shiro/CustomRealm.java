@@ -29,10 +29,10 @@ public class CustomRealm extends AuthorizingRealm {
     }
 
     /**
+     * @param principalCollection
      * @date:2019/3/29 14:51
      * @author:wwwtietuo.zhang
      * @description: 授权
-     * @param principalCollection
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
@@ -45,10 +45,10 @@ public class CustomRealm extends AuthorizingRealm {
     }
 
     /**
+     * @param authenticationToken
      * @date:2019/3/29 14:51
      * @author:wwwtietuo.zhang
      * @description: 认证
-     * @param authenticationToken
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
@@ -56,7 +56,7 @@ public class CustomRealm extends AuthorizingRealm {
         String username = (String) authenticationToken.getPrincipal();//
         //2. 用户名来验证密码
         String password = getPassByUser(username);
-        if(null != password) {
+        if (null != password) {
             SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(username, password, "customRealm");
             authenticationInfo.setCredentialsSalt(ByteSource.Util.bytes("salt"));
             return authenticationInfo;

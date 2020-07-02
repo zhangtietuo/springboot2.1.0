@@ -63,7 +63,7 @@ public class HashMapDemo {
 
     static final int hash(Object key) {
         int h;
-        if(key == null) {
+        if (key == null) {
             return 0;
         } else {
             h = key.hashCode();

@@ -13,8 +13,8 @@ public class ConcreateObserver implements Observer {
 
     @Override
     public void update(Subject subject) {
-        observerState = ((ConcreteSubject)subject).getState();
-        System.out.println(observerName+"收到了"+observerState+"讯息"+("ztt".equals(observerName)?"你吹牛逼最棒":"你唱歌真好听"));
+        observerState = ((ConcreteSubject) subject).getState();
+        System.out.println(observerName + "收到了" + observerState + "讯息" + ("ztt".equals(observerName) ? "你吹牛逼最棒" : "你唱歌真好听"));
     }
 
     public String getObserverState() {

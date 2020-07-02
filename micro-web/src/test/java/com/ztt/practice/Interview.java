@@ -16,7 +16,7 @@ public class Interview {
         System.out.println(y1 == yy1);
         String a = "a";
         char b = 'a';
-        System.out.println(a+ 10);
-        System.out.println(b+ 10);
+        System.out.println(a + 10);
+        System.out.println(b + 10);
     }
 }

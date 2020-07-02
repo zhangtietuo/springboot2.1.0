@@ -27,9 +27,9 @@ class RunnableDemo1 implements Runnable {
 
     @Override
     public void run() {
-        for(int i=0;i<50;i++) {
-            System.out.println(name+":"+i);
-            if(i == 10){
+        for (int i = 0; i < 50; i++) {
+            System.out.println(name + ":" + i);
+            if (i == 10) {
                 System.out.println(name + "礼让");
                 Thread.yield();
             }
