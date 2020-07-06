@@ -9,4 +9,6 @@ public interface Product {
 
     public abstract void show();
 
+    public static final int i = 0;
+
 }
