@@ -1,4 +1,4 @@
-package com.ztt.designMode.adapterMode;
+package com.ztt.designMode.G_adapterMode;
 
 /**
  * @Auther: zhangtietuo
