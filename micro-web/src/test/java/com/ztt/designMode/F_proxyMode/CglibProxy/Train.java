@@ -1,4 +1,4 @@
-package com.ztt.designMode.proxyMode.CglibProxy;
+package com.ztt.designMode.F_proxyMode.CglibProxy;
 
 /**
  * @Auther: zhangtietuo
