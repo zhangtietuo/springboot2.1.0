@@ -17,6 +17,8 @@ public class HashMapDemo {
         hash("zzz");
         Map<String, String> map = new HashMap<>();
         map.put("k1", "v1");
+        map.put(null, null);
+        map.put("", null);
         map.put("k2", "v2");
         map.put("k3", "v3");
         map.put("k4", "v4");
@@ -44,6 +46,7 @@ public class HashMapDemo {
         concurrentHashMap.put("k11", "v11");
         concurrentHashMap.put("k12", "v12");
         concurrentHashMap.put("k13", "v13");
+        //concurrentHashMap.put(null, null);
         /*============================================================================*/
         Map<String, String> hashtable = new Hashtable<>();
         hashtable.put("k1", "v1");
@@ -59,6 +62,7 @@ public class HashMapDemo {
         hashtable.put("k11", "v11");
         hashtable.put("k12", "v12");
         hashtable.put("k13", "v13");
+        hashtable.put(null, null);
     }
 
     static final int hash(Object key) {

@@ -8,6 +8,7 @@ package com.ztt.java_core;
 public class StringTest {
 
     public static void main(String[] args) {
+        System.out.println(Math.floor((7)/2));
         String s = new String("1");
         s.intern();
         String s2 = "1";

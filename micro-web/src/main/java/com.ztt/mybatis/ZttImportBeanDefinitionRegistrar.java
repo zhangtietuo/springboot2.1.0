@@ -7,6 +7,8 @@ import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
 import org.springframework.core.type.AnnotationMetadata;
 import org.springframework.stereotype.Component;
 
+import java.util.Map;
+
 /**
  * @Auther: zhangtietuo
  * @Description:
@@ -18,6 +20,8 @@ public class ZttImportBeanDefinitionRegistrar implements ImportBeanDefinitionReg
     public void registerBeanDefinitions(AnnotationMetadata annotationMetadata, BeanDefinitionRegistry beanDefinitionRegistry) {
         //扫描@zttScan里的包名
         //System.out.println(beanDefinitionRegistry.getBeanDefinition("userRepository"));
+        Map<String, Object> annotationAttributes = annotationMetadata.getAnnotationAttributes(ZttScan.class.getName());
+        Object o = annotationAttributes.get("value");
         BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(ZttFactoryBean.class);
         AbstractBeanDefinition beanDefinition = builder.getBeanDefinition();
         beanDefinition.getConstructorArgumentValues().addGenericArgumentValue("com.ztt.repository.UserRepositoryInter");

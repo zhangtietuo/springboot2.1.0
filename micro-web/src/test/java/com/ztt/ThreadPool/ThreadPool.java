@@ -1,6 +1,7 @@
 package com.ztt.ThreadPool;
 
 import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
@@ -28,6 +29,7 @@ public class ThreadPool {
                     executor.getQueue().size()+"，已执行玩别的任务数目："+executor.getCompletedTaskCount());
         }
         executor.shutdown();*/
+        Executors.newCachedThreadPool();
     }
 
     static class MyTask implements Runnable {

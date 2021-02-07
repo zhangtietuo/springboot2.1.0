@@ -13,8 +13,9 @@ public class B extends A {
     }
 
     public static void main(String[] args) {
-        B b = new B();
+        A b = new B();
         int x = b.z;
         b.m();
+
     }
 }

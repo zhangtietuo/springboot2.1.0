@@ -18,7 +18,8 @@
         <module>micro-zookeeper</module>
         <module>nio</module>
 		<module>es</module>
-	</modules>
+        <module>spring-mybatis-web</module>
+    </modules>
 
 	<packaging>pom</packaging><!-- 修改为pom代表为父项目 -->
 

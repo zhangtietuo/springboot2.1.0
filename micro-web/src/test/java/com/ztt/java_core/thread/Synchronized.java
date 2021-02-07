@@ -11,6 +11,7 @@ import java.util.concurrent.locks.ReentrantLock;
 public class Synchronized {
 
     public static void main(String[] args) throws InterruptedException {
+        //ThreadLocal
         RunnableDemo2 r = new RunnableDemo2();
         Thread t1 = new Thread(r, "A");
         t1.setUncaughtExceptionHandler(new MyExceptionHandler());
