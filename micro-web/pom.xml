@@ -17,7 +17,7 @@
         <java.version>1.8</java.version>
         <!--properties节点中设置docker镜像的前缀“springboot”-->
         <docker.image.prefix>springboot2.1.0</docker.image.prefix>
-        <shiro-spring.version>1.4.0</shiro-spring.version>
+        <shiro-spring.version>1.6.0</shiro-spring.version>
         <mysql-connector-java.version>8.0.15</mysql-connector-java.version>
         <jwt.version>0.9.1</jwt.version>
         <druid.version>1.1.14</druid.version>
