@@ -14,7 +14,7 @@ import io.netty.util.CharsetUtil;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Iterator;
+import java.util.*;
 
 /**
  * @Auther: zhangtietuo
@@ -36,11 +36,11 @@ public class MyWebSocketHandler extends SimpleChannelInboundHandler<Object> {
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         NettyConstant.channelGroup.add(ctx.channel());
-        NettyConstant.userMap.put(ctx.channel().id().toString(), "");
-        TextWebSocketFrame tws = new TextWebSocketFrame("欢迎用户:"+ctx.channel().id()+" 加入ztt的聊天室");
-        NettyConstant.channelGroup.writeAndFlush(tws);
-        TextWebSocketFrame userMapInfo = new TextWebSocketFrame(JSONObject.toJSONString(NettyConstant.userMap));
-        NettyConstant.channelGroup.writeAndFlush("人员信息: " + userMapInfo);
+//        NettyConstant.userMap.put(ctx.channel().id().toString(), "");
+//        TextWebSocketFrame tws = new TextWebSocketFrame("欢迎用户:"+ctx.channel().id()+" 加入ztt的聊天室");
+//        NettyConstant.channelGroup.writeAndFlush(tws);
+//        TextWebSocketFrame userMapInfo = new TextWebSocketFrame(JSONObject.toJSONString(NettyConstant.userMap));
+//        NettyConstant.channelGroup.writeAndFlush("人员信息: " + userMapInfo);
         System.out.println("==========客户端与服务端连接开启================");
     }
 
@@ -87,7 +87,7 @@ public class MyWebSocketHandler extends SimpleChannelInboundHandler<Object> {
      */
     @Override
     protected void messageReceived(ChannelHandlerContext channelHandlerContext, Object msg) throws Exception {
-        //处理客户端向服务端发起http握手请求的业务
+        //处理客户端向服务端发起http握手请求的业务msg = {TextWebSocketFrame@2374} "TextWebSocketFrame(data: PooledUnsafeDirectByteBuf(ridx: 0, widx: 9, cap: 9))"
         if(msg instanceof FullHttpRequest) {
             handHttpRequest(channelHandlerContext, (FullHttpRequest) msg);
         } else if(msg instanceof WebSocketFrame) {//处理websocket连接业务
@@ -106,7 +106,7 @@ public class MyWebSocketHandler extends SimpleChannelInboundHandler<Object> {
             sendHttpResponse(ctx, req, new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.BAD_REQUEST));
             return;
         } else {
-            System.out.println("客户端连接服务端");
+            System.out.println("客户端连接服务端握手");
         }
         WebSocketServerHandshakerFactory wsFactory = new WebSocketServerHandshakerFactory(WEB_SOCKET_URL, null, false);
         handshaker = wsFactory.newHandshaker(req);
@@ -164,9 +164,23 @@ public class MyWebSocketHandler extends SimpleChannelInboundHandler<Object> {
         String request = ((TextWebSocketFrame) frame).text();
         System.out.println("服务端收到客户端的消息=====》》"+ request);
         String[] requestArr = request.split("\\|");
-        TextWebSocketFrame tws = new TextWebSocketFrame(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) +"  "+requestArr[0]+"("+ctx.channel().id()+")"+":  "+ requestArr[1]);
-        //群发，服务端向每个连接上来的客户端群发消息
-        NettyConstant.channelGroup.writeAndFlush(tws);
+        if(1 == Integer.parseInt(requestArr[0])) {
+            UserEntity user = new UserEntity();
+            user.setNickName(requestArr[1]);
+            user.setChannel(ctx.channel());
+            NettyConstant.userMap.put(ctx.channel().id().toString(), user);
+            TextWebSocketFrame tws = new TextWebSocketFrame("1|"+"欢迎用户:"+NettyConstant.userMap.get(ctx.channel().id().toString()).getNickName()+"("+ctx.channel().id()+")"+" 加入ztt的聊天室");
+            NettyConstant.channelGroup.writeAndFlush(tws);
+            List<String> nickNameArr = new ArrayList<>();
+            NettyConstant.userMap.values().forEach(userEntity -> nickNameArr.add(userEntity.getNickName()+ctx.channel().id()));
+            TextWebSocketFrame userMapInfo = new TextWebSocketFrame(4+"|"+JSONObject.toJSONString(nickNameArr));
+            NettyConstant.channelGroup.writeAndFlush(userMapInfo);
+        } else if(2 == Integer.parseInt(requestArr[0])) {
+            TextWebSocketFrame tws = new TextWebSocketFrame(2+"|"+LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) +"  "+NettyConstant.userMap.get(ctx.channel().id().toString()).getNickName()+"("+ctx.channel().id()+")"+":  "+ requestArr[1]);
+            //群发，服务端向每个连接上来的客户端群发消息
+            NettyConstant.channelGroup.writeAndFlush(tws);
+        }
+
 
     }
 }

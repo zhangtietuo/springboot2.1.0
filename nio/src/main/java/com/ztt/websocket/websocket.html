@@ -10,21 +10,35 @@
             window.WebSocket = window.MozWebSocket;
         }
         if(window.WebSocket) {
-            socket = new WebSocket('ws://39.107.105.125:8888/websocket');
+            socket = new WebSocket('ws://localhost:8888/websocket');
             //socket = new WebSocket('ws://localhost:8888/websocket');
             socket.onmessage = function(event) {
                 console.log(event)
-                //alert('onmessage')
-                let ta = document.getElementById('responseContent');
-                ta.value += event.data + '\r\n';
+                let data = event.data;
+                let dataArr = data.split('|');
+                if('4' === dataArr[0]) {
+                    let userArr = JSON.parse(dataArr[1])
+                    let ta = document.getElementById('userList');
+                    ta.value = ''
+                    userArr.forEach(user=> {
+                        ta.value += user + '\r\n';
+                    })
+                } else if('2' === dataArr[0]) {
+                    let ta = document.getElementById('responseContent');
+                    ta.value += dataArr[1] + '\r\n';
+                } else if('1' === dataArr[0]) {
+                    let ta = document.getElementById('responseContent');
+                    ta.value += dataArr[1] + '\r\n';
+                }
             }
             socket.onopen = function(event) {
                 let ta = document.getElementById('responseContent');
                 ta.value += '您好，召唤师！' + '\r\n';
-                let name = prompt('请输入您的姓名');
-                if(name != '') {
+                let name = prompt('请输入您的姓名(不输入姓名无法发炎)');
+                if(name !== '') {
                     nickname = name;
                 }
+                send(1, nickname);
 
             }
             socket.onclose = function(event) {
@@ -37,12 +51,16 @@
             alert('您的浏览器不支持socket');
         }
 
-        function send(msg) {
+        function send(type, msg) {
+            if('' === msg) {
+                alert('不能输入空')
+                return;
+            }
             if(!window.WebSocket) {
                 return;
             }
-            if(socket.readyState == WebSocket.OPEN) {
-                socket.send(nickname + "|"+msg);
+            if(socket.readyState === WebSocket.OPEN) {
+                socket.send(type + "|"+msg);
             } else {
                 alert('websocket没有连接成功 ')
             }
@@ -215,9 +233,9 @@ BEIgBEIgBEIgBEIgBEIgBEIgBEIgBEIgBEIgbBaECAQCCBEIIEQgEECIQAAhAoEAQgQCCBEIBBAi
 EECIQCCAEIEAQgQCAYQIBBAiEAggRCCAEIFAACECAYQIBAIIEYgGif8PALKUcWsez8gAAAAASUVO
 RK5CYII=" />
     <form onsubmit="return false;">
-        <input type="text" name="message" value=""/>
+        <input type="text" name="message" value="" placeholder="请输入想说的话..." onkeydown="if(event.keyCode===13){send(2, this.form.message.value);return false}"/>
         <br/><br/>
-        <input type="button" onclick="send(this.form.message.value)" value="发送信息"/>
+        <input type="button" onclick="send(2, this.form.message.value)"  value="发送信息"/>
         <hr color="red"/>
         <h2>信息记录</h2>
         <textarea id="responseContent" style="width: 1025px;height: 300px">

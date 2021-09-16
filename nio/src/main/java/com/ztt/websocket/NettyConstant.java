@@ -5,6 +5,7 @@ import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.util.concurrent.GlobalEventExecutor;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -19,5 +20,5 @@ public class NettyConstant {
      */
     public static ChannelGroup channelGroup = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
 
-    public static Map<String, String> userMap = new HashMap<String, String>();
+    public static LinkedHashMap<String, UserEntity> userMap = new LinkedHashMap<String, UserEntity>();
 }
