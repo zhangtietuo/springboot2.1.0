@@ -36,11 +36,6 @@ public class MyWebSocketHandler extends SimpleChannelInboundHandler<Object> {
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         NettyConstant.channelGroup.add(ctx.channel());
-//        NettyConstant.userMap.put(ctx.channel().id().toString(), "");
-//        TextWebSocketFrame tws = new TextWebSocketFrame("欢迎用户:"+ctx.channel().id()+" 加入ztt的聊天室");
-//        NettyConstant.channelGroup.writeAndFlush(tws);
-//        TextWebSocketFrame userMapInfo = new TextWebSocketFrame(JSONObject.toJSONString(NettyConstant.userMap));
-//        NettyConstant.channelGroup.writeAndFlush("人员信息: " + userMapInfo);
         System.out.println("==========客户端与服务端连接开启================");
     }
 
@@ -50,13 +45,17 @@ public class MyWebSocketHandler extends SimpleChannelInboundHandler<Object> {
      * @throws Exception
      */
     @Override
-    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+    public void channelInactive(ChannelHandlerContext ctx) {
         NettyConstant.channelGroup.remove(ctx.channel());
-        TextWebSocketFrame tws = new TextWebSocketFrame("用户:"+ctx.channel().id()+" 已退出聊天");
-        NettyConstant.channelGroup.writeAndFlush(tws);
+        if(NettyConstant.userMap.containsKey(ctx.channel().id().toString())) {
+            TextWebSocketFrame tws = new TextWebSocketFrame("3|用户:"+NettyConstant.userMap.get(ctx.channel().id().toString()).getNickName()+"("+ctx.channel().id().toString()+"}"+" 已退出聊天");
+            NettyConstant.channelGroup.writeAndFlush(tws);
+        }
         NettyConstant.userMap.remove(ctx.channel().id().toString());
-        TextWebSocketFrame userMapInfo = new TextWebSocketFrame(JSONObject.toJSONString(NettyConstant.userMap));
-        NettyConstant.channelGroup.writeAndFlush("人员信息: " + userMapInfo);
+        List<String> nickNameArr = new ArrayList<>();
+        NettyConstant.userMap.values().forEach(userEntity -> nickNameArr.add(userEntity.getNickName()+ctx.channel().id()));
+        TextWebSocketFrame userMapInfo = new TextWebSocketFrame(4+"|"+JSONObject.toJSONString(nickNameArr));
+        NettyConstant.channelGroup.writeAndFlush(userMapInfo);
         System.out.println("===============客户端与服务端连接断开===================");
     }
 
@@ -140,7 +139,7 @@ public class MyWebSocketHandler extends SimpleChannelInboundHandler<Object> {
     /**
      * 处理服务端与客户端的websocket业务
      * @param ctx
-     * @param frame
+     * @param frame  type 1:用户登录 2：发送消息 3：欢迎/退出  4：用户列表
      */
     private void handWesocketFrame(ChannelHandlerContext ctx, WebSocketFrame frame) {
         //判断是否 是关闭websocket的指令
@@ -169,10 +168,10 @@ public class MyWebSocketHandler extends SimpleChannelInboundHandler<Object> {
             user.setNickName(requestArr[1]);
             user.setChannel(ctx.channel());
             NettyConstant.userMap.put(ctx.channel().id().toString(), user);
-            TextWebSocketFrame tws = new TextWebSocketFrame("1|"+"欢迎用户:"+NettyConstant.userMap.get(ctx.channel().id().toString()).getNickName()+"("+ctx.channel().id()+")"+" 加入ztt的聊天室");
+            TextWebSocketFrame tws = new TextWebSocketFrame("3|"+"欢迎用户:"+NettyConstant.userMap.get(ctx.channel().id().toString()).getNickName()+"("+ctx.channel().id()+")"+" 加入ztt的聊天室");
             NettyConstant.channelGroup.writeAndFlush(tws);
             List<String> nickNameArr = new ArrayList<>();
-            NettyConstant.userMap.values().forEach(userEntity -> nickNameArr.add(userEntity.getNickName()+ctx.channel().id()));
+            NettyConstant.userMap.values().forEach(userEntity -> nickNameArr.add(userEntity.getNickName()+"("+ctx.channel().id()+")"));
             TextWebSocketFrame userMapInfo = new TextWebSocketFrame(4+"|"+JSONObject.toJSONString(nickNameArr));
             NettyConstant.channelGroup.writeAndFlush(userMapInfo);
         } else if(2 == Integer.parseInt(requestArr[0])) {

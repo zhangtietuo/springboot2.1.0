@@ -29,11 +29,12 @@
                 } else if('1' === dataArr[0]) {
                     let ta = document.getElementById('responseContent');
                     ta.value += dataArr[1] + '\r\n';
+                } else if('3' === dataArr[0]) {
+                    let ta = document.getElementById('responseContent');
+                    ta.value += '\t'+dataArr[1] + '\r\n';
                 }
             }
             socket.onopen = function(event) {
-                let ta = document.getElementById('responseContent');
-                ta.value += '您好，召唤师！' + '\r\n';
                 let name = prompt('请输入您的姓名(不输入姓名无法发炎)');
                 if(name !== '') {
                     nickname = name;
