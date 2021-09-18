@@ -36,8 +36,14 @@
             }
             socket.onopen = function(event) {
                 let name = prompt('请输入您的姓名(不输入姓名无法发炎)');
-                if(name !== '') {
+                if(null !== name && name !== '') {
                     nickname = name;
+                } else {
+                    let message = document.getElementById('message');
+                    let sendB = document.getElementById('sendB');
+                    message.hidden = true
+                    sendB.hidden = true
+                    return;
                 }
                 send(1, nickname);
 
@@ -234,9 +240,9 @@ BEIgBEIgBEIgBEIgBEIgBEIgBEIgBEIgBEIgbBaECAQCCBEIIEQgEECIQAAhAoEAQgQCCBEIBBAi
 EECIQCCAEIEAQgQCAYQIBBAiEAggRCCAEIFAACECAYQIBAIIEYgGif8PALKUcWsez8gAAAAASUVO
 RK5CYII=" />
     <form onsubmit="return false;">
-        <input type="text" name="message" value="" placeholder="请输入想说的话..." onkeydown="if(event.keyCode===13){send(2, this.form.message.value);return false}"/>
+        <input type="text" name="message" id="message" value="" placeholder="请输入想说的话..." onkeydown="if(event.keyCode===13){send(2, this.form.message.value);return false}"/>
         <br/><br/>
-        <input type="button" onclick="send(2, this.form.message.value)"  value="发送信息"/>
+        <input type="button" id="sendB" onclick="send(2, this.form.message.value)"  value="发送信息"/>
         <hr color="red"/>
         <h2>信息记录</h2>
         <textarea id="responseContent" style="width: 1025px;height: 300px">
