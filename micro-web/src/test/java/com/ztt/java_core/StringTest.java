@@ -15,7 +15,7 @@ public class StringTest {
         System.out.println(s == s2);
         System.out.println(s.intern() == s2);
 
-        String s3 = new StringBuffer("ztt").append("qqq").toString();
+        String s3 = new String("zttqqq");
         System.out.println( s3.intern() == s3);
         s3.intern();
         String s4 = "11";
