@@ -23,7 +23,7 @@ public class DelayQueueTest {
         System.out.println("Done");
         try {
             log.info(delayQueue.take().getMsg());
-            Thread.sleep(10000);
+            //Thread.sleep(10000);
             log.info(delayQueue.take().getMsg());
         } catch (InterruptedException e) {
             e.printStackTrace();

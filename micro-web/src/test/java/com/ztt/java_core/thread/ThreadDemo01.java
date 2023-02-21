@@ -16,9 +16,10 @@ public class ThreadDemo01 {
         t1.start();
         System.out.println(t1.isAlive());
         //t2.start();
+
         for (int i = 0; i < 50; i++) {
             if (i > 10) {
-                t1.join();
+                t1.join(1);
                 /**join方法可以传递参数，join(10)表示main线程会等待t1线程10毫秒，10毫秒过去后，
                  * main线程和t1线程之间执行顺序由串行执行变为普通的并行执行
                  * join方法的原理就是调用相应线程的wait方法进行等待操作的，例如A线程中调用了B线程的join方法，则相当于在A线程中调用了B线程的wait方法，当B线程执行完（或者到达等待时间），B线程会自动调用自身的notifyAll方法唤醒A线程，从而达到同步的目的。

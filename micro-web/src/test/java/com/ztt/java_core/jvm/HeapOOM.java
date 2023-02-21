@@ -9,7 +9,6 @@ import java.util.List;
  * @author zzm
  */
 public class HeapOOM {
-
     static class OOMObject {
     }
 
