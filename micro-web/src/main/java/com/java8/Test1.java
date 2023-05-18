@@ -1,54 +1,19 @@
 package com.java8;
 
-import lombok.SneakyThrows;
 import org.redisson.RedissonLock;
-
-import java.util.ArrayList;
 
 /**
  * @Description
  * @Author tietuo.zhang
  * @Date 2022/8/19 18:24
  */
-public class Test {
+public class Test1 {
 
     private final int a=0;
 
-    static int x =10;
-
-    static {
-        System.out.println("asd"+x);
-        x+=5;
-    }
-
-    static {
-        System.out.println(x);
-        x/=3;
-    }
 
 
-    public static void main(String[] args) {
-        String z = "com.jd.".replaceAll(".", "q")+"Myclass.class";
-        System.out.println(z);
-        Thread t= new Thread() {
-            @SneakyThrows
-            @Override
-            public void run() {
-                Thread.sleep(1000);
-                pong();
-            }
-        };
-        t.start();
-        t.run();
-        System.out.println("ping");
-        System.out.println("x="+x);
-        System.out.println(Test.longestPalindrome("aacabdkacaa"));
-    }
-
-    static void pong() {
-        System.out.println("pong");
-    }
-    public static String longestPalindrome(String s) {
+    public static String longestPalindrome1(String s) {
 
         char[] arr = s.toCharArray();
         String r = null;
@@ -81,15 +46,11 @@ public class Test {
         return s.substring(start1, start1+length);
     }
 
-    public void a() {
+    public void a1() {
         Test test = new Test();
-        new ArrayList(20);
     }
 
-    public static void b1()  {
-        Runtime.getRuntime().gc();
-        System.gc();
+    public final void b() {
         System.out.println("Test");
     }
-
 }

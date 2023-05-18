@@ -1,6 +1,9 @@
 package com.ztt.controller;
 
 import com.ztt.utils.QrCodeUtils;
+import org.redisson.Redisson;
+import org.redisson.api.RLock;
+import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,8 +26,13 @@ public class QRController {
     @Autowired
     HttpServletResponse response;
 
+    @Autowired
+    private RedissonClient redissonClient;
+
     @RequestMapping("/qrcode")
     public String qrcode() {
+        RLock lock = redissonClient.getLock("a");
+        lock.tryLock();
 
         StringBuffer url = request.getRequestURL();
         // 域名

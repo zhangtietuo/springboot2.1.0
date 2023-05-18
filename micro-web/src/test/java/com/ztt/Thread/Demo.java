@@ -12,5 +12,6 @@ public class Demo {
         Thread thread2 = new Thread(new SyncThread(), "SyncThread2");
         thread1.start();
         thread2.start();
+
     }
 }

@@ -7,6 +7,11 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.Aware;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.BeanFactoryAware;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +24,7 @@ import java.util.UUID;
  * Created by zhangtietuo on 2018/4/17.
  */
 @RestController
-public class UserController {
+public class UserController implements InitializingBean, BeanFactoryAware {
 
     @Value("${manSize}")
     private Integer manSize;
@@ -95,4 +100,13 @@ public class UserController {
         return null;
     }
 
+    @Override
+    public void afterPropertiesSet() throws Exception {
+
+    }
+
+    @Override
+    public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
+
+    }
 }
